@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Múshu · Bubble tea & coffee en Cali</title>
+<meta name="description" content="Bubble tea y café en Cali donde Asia y Colombia se encuentran. La Casita (Miraflores) y Lago Verde (Pance). Pide por Rappi, DiDi o WhatsApp.">
+<meta property="og:title" content="Múshu · Bubble tea & coffee">
+<meta property="og:description" content="Experiencias culturales en Cali: La Casita (Miraflores) y Lago Verde (Pance).">
+<meta property="og:image" content="/assets/stores/lagoverde.jpg">
+<link rel="icon" type="image/png" href="/assets/brand/mascot-k.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&amp;family=Instrument+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#FFFDED;-webkit-font-smoothing:antialiased}
+html,body{overflow-x:clip}
+*{box-sizing:border-box}
+a{color:#141414;text-decoration:none}
+a:hover{color:#5B55B8}
+input,textarea,select,button{font-family:inherit}
+@keyframes mFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-22px) rotate(3deg)}}
+@keyframes mBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes mMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+</style>
+</helmet>
+<div style="font-family:'Instrument Sans',system-ui,sans-serif;color:#141414;background:#FFFDED;min-height:100vh;position:relative">
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:{{ headPad }};background:{{ headBg }};backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:padding .35s ease,background .35s ease">
+  <a href="#" onClick="{{ goHome }}" style="display:flex;align-items:center;height:{{ logoH }}px;transition:height .35s"><img src="{{ logoSrc }}" alt="Múshu" style="height:100%;width:auto;display:block"></a>
+  <div style="display:flex;align-items:center;gap:10px">
+    <button onClick="{{ toggleLang }}" style="height:44px;padding:0 14px;border-radius:999px;border:1.5px solid {{ hdInk }};background:transparent;color:{{ hdInk }};font-weight:600;font-size:14px;cursor:pointer;transition:color .3s,border-color .3s">{{ t.langBtn }}</button>
+    <button onClick="{{ openOrder }}" style="height:44px;padding:0 20px;border-radius:999px;border:none;background:{{ hdInk }};color:{{ hdPaper }};font-weight:700;font-size:15px;cursor:pointer;transition:transform .2s,background .3s,color .3s" style-hover="transform:scale(1.05)">{{ t.order }}</button>
+    <button onClick="{{ toggleMenu }}" aria-label="Menu" style="width:44px;height:44px;border-radius:50%;border:none;background:#ECFA95;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px">
+      <span style="width:18px;height:2px;background:#111111;display:block;transition:transform .3s;transform:{{ burger1 }}"></span>
+      <span style="width:18px;height:2px;background:#111111;display:block;transition:transform .3s;transform:{{ burger2 }}"></span>
+    </button>
+  </div>
+</header>
+
+<div style="position:fixed;inset:0;z-index:40;background:#141414;color:#FFFDED;transform:{{ menuTf }};transition:transform .6s cubic-bezier(.7,0,.2,1);display:flex;flex-direction:column;justify-content:flex-start;overflow-x:hidden;padding:100px clamp(24px,6vw,96px) 40px;overflow:auto">
+  <nav style="display:flex;flex-direction:column;gap:4px;margin-top:auto">
+    <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+      <a href="#" onClick="{{ n.go }}" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(44px,9vw,110px);line-height:1;letter-spacing:-0.04em;color:{{ n.color }};display:flex;align-items:baseline;gap:18px;opacity:{{ menuOp }};transform:{{ menuItemTf }};transition:opacity .5s ease {{ n.delay }}ms,transform .6s cubic-bezier(.2,.7,.2,1) {{ n.delay }}ms,color .2s" style-hover="color:#ECFA95">
+        <span style="font-family:'Instrument Sans',sans-serif;font-size:14px;font-weight:600;letter-spacing:0.1em;color:#A7A4E0">{{ n.num }}</span>{{ n.label }}
+      </a>
+    </sc-for>
+  </nav>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:48px;margin-bottom:auto;font-size:15px;color:#D9C7B4">
+    <a href="https://www.instagram.com/mushu.coo" style="color:inherit" style-hover="color:#ECFA95" target="_blank">Instagram</a><span>·</span><a href="https://www.tiktok.com/@mushu.coo" style="color:inherit" style-hover="color:#ECFA95" target="_blank">TikTok</a><span>·</span><a href="https://www.facebook.com/mushu.coo/" style="color:inherit" style-hover="color:#ECFA95" target="_blank">Facebook</a><span>·</span><span>{ t.madeIn }</span>
+  </div>
+  <img src="assets/brand/mascot-w.png" alt="" style="position:absolute;right:clamp(20px,6vw,96px);bottom:40px;width:clamp(90px,14vw,180px);animation:mBob 3s ease-in-out infinite;pointer-events:none">
+</div>
+
+<div onClick="{{ closeOrder }}" style="position:fixed;inset:0;z-index:60;background:rgba(10,10,10,.55);opacity:{{ orderOp }};pointer-events:{{ orderPe }};transition:opacity .3s"></div>
+<div style="position:fixed;left:50%;bottom:0;z-index:61;width:min(560px,100%);background:#FFFFFF;border-radius:28px 28px 0 0;padding:28px 24px 32px;transform:translate(-50%,{{ orderY }});transition:transform .5s cubic-bezier(.2,.8,.2,1);box-shadow:0 -20px 60px rgba(20,20,20,.2)">
+  <div style="width:44px;height:5px;border-radius:9px;background:#DBC8B6;margin:0 auto 20px"></div>
+  <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:32px;letter-spacing:-0.03em;margin:0 0 6px">{{ t.orderTitle }}</h3>
+  <p style="margin:0 0 20px;color:#5A5550;font-size:16px">{{ t.orderSub }}</p>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <sc-for list="{{ apps }}" as="a" hint-placeholder-count="3">
+      <a href="{{ a.href }}" target="_blank" style="display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding:0 20px;border-radius:18px;background:{{ a.bg }};color:#111111;font-weight:700;font-size:18px;transition:transform .2s" style-hover="transform:translateX(6px);color:#111111">
+        <span>{{ a.name }}</span><span style="font-size:14px;font-weight:600;opacity:.75">{{ a.note }} →</span>
+      </a>
+    </sc-for>
+  </div>
+</div>
+
+<main style="overflow-x:clip;opacity:{{ fade }};transform:translateY({{ fadeY }}px);transition:opacity .35s ease,transform .45s cubic-bezier(.2,.7,.2,1)">
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="Inicio" style="position:relative;min-height:100vh;padding:120px clamp(20px,5vw,72px) 60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));align-items:center;gap:40px;overflow:hidden">
+    <div data-par="0.25" style="position:absolute;top:9%;left:42%;width:26px;height:26px;border-radius:50%;background:#141414;pointer-events:none"></div>
+    <div data-par="-0.15" style="position:absolute;top:70%;left:44%;width:40px;height:40px;border-radius:50%;background:#141414;pointer-events:none"></div>
+    <div data-par="0.4" style="position:absolute;top:12%;right:8%;width:18px;height:18px;border-radius:50%;background:#A7A4E0;pointer-events:none"></div>
+    <div data-par="-0.3" style="position:absolute;bottom:10%;right:30%;width:22px;height:22px;border-radius:50%;background:#ECFA95;pointer-events:none"></div>
+    <div style="position:relative;z-index:2">
+      <h1 data-reveal="80" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(44px,6.4vw,108px);line-height:.88;letter-spacing:-0.05em;margin:0 0 28px;text-wrap:balance">{{ t.heroA }}<br><span style="color:#5B55B8">{{ t.heroB }}</span></h1>
+      <p data-reveal="160" style="font-size:clamp(18px,1.6vw,22px);line-height:1.5;max-width:480px;margin:0 0 36px;color:#5A5550;text-wrap:pretty">{{ t.heroP }}</p>
+      <div data-reveal="240" style="display:flex;flex-wrap:wrap;gap:12px">
+        <button onClick="{{ goMenu }}" style="height:56px;padding:0 30px;border-radius:999px;border:none;background:#141414;color:#FFFDED;font-weight:700;font-size:17px;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)">{{ t.seeMenu }}</button>
+        <button onClick="{{ openOrder }}" style="height:56px;padding:0 30px;border-radius:999px;border:2px solid #141414;background:transparent;color:#141414;font-weight:700;font-size:17px;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)">{{ t.orderNow }}</button>
+      </div>
+    </div>
+    <div style="position:relative;z-index:1;display:flex;justify-content:center;align-items:center;min-height:min(80vw,620px)">
+      <div style="position:absolute;width:min(78vw,540px);aspect-ratio:1;border-radius:50%;background:#A7A4E0"></div>
+      <div style="position:absolute;width:min(92vw,640px);aspect-ratio:1;border-radius:50%;border:1.5px dashed #141414;opacity:.35;animation:mSpin 40s linear infinite"></div>
+      <div style="position:relative;width:min(60vw,380px);aspect-ratio:3/4;animation:mFloat 6s ease-in-out infinite">
+        <image-slot id="hero-cup" src="assets/drinks/d7.png" shape="rounded" radius="40" fit="contain" placeholder="Foto bebida estrella (PNG sin fondo)"></image-slot>
+      </div>
+      <div style="position:absolute;top:8%;right:4%;width:clamp(90px,14vw,140px);aspect-ratio:1;animation:mBob 4s ease-in-out infinite">
+        <image-slot id="hero-char" shape="rect" fit="contain" src="assets/brand/mascot-k.png" placeholder="Personaje Mushu"></image-slot>
+      </div>
+      <div style="position:absolute;bottom:6%;left:2%;padding:14px 18px;border-radius:20px;background:#ECFA95;color:#111111;font-weight:700;font-size:15px;transform:rotate(-6deg);animation:mBob 5s ease-in-out infinite">{{ t.sticker }}</div>
+      <div style="position:absolute;bottom:2%;right:4%;width:clamp(84px,12vw,124px);aspect-ratio:1;animation:mSpin 22s linear infinite;pointer-events:none"><img src="assets/brand/stamp-k.png" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+    </div>
+  </section>
+
+  <div style="background:#141414;color:#FFFDED;overflow:hidden;padding:22px 0;transform:rotate(-1.5deg);margin:0 -20px">
+    <div style="display:flex;width:max-content;animation:mMarquee 28s linear infinite">
+      <sc-for list="{{ marquee }}" as="m" hint-placeholder-count="12">
+        <span style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,48px);letter-spacing:-0.03em;padding:0 28px;white-space:nowrap;display:flex;align-items:center;gap:56px">{{ m }}<span style="width:16px;height:16px;border-radius:50%;background:#ECFA95;display:block"></span></span>
+      </sc-for>
+    </div>
+  </div>
+
+  <section style="padding:120px clamp(20px,5vw,72px)">
+    <div style="max-width:1280px;margin:0 auto">
+      <p data-reveal="0" style="font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:#5B55B8;margin:0 0 12px">{{ t.howKicker }}</p>
+      <h2 data-reveal="60" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(40px,6vw,84px);line-height:.95;letter-spacing:-0.04em;margin:0 0 56px;max-width:900px;text-wrap:balance">{{ t.howTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+          <div data-reveal="{{ s.delay }}" style="background:#FFFFFF;border-radius:28px;padding:28px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .3s cubic-bezier(.2,.7,.2,1)" style-hover="transform:translateY(-8px) rotate(-1deg)">
+            <div style="width:64px;height:64px;border-radius:50%;background:{{ s.bg }};display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;font-size:26px;color:#111111">{{ s.n }}</div>
+            <div>
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;letter-spacing:-0.03em;margin:0 0 8px">{{ s.title }}</h3>
+              <p style="margin:0;font-size:16px;line-height:1.5;color:#5A5550">{{ s.text }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:40px 0 120px;overflow:hidden">
+    <div style="display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px;padding:0 clamp(20px,5vw,72px);max-width:1424px;margin:0 auto 40px">
+      <h2 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(40px,6vw,84px);line-height:.95;letter-spacing:-0.04em;margin:0">{{ t.sigTitle }}</h2>
+      <button onClick="{{ goMenu }}" style="height:48px;padding:0 24px;border-radius:999px;border:2px solid #141414;background:transparent;color:#141414;font-weight:700;font-size:15px;cursor:pointer">{{ t.fullMenu }} →</button>
+    </div>
+    <div style="display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px clamp(20px,5vw,72px) 30px;scrollbar-width:none">
+      <sc-for list="{{ signature }}" as="p" hint-placeholder-count="6">
+        <div data-reveal="{{ p.delay }}" style="flex:0 0 min(78vw,320px);scroll-snap-align:start;background:{{ p.bg }};color:#111111;border-radius:32px;padding:22px;display:flex;flex-direction:column;gap:16px;transition:transform .35s cubic-bezier(.2,.7,.2,1)" style-hover="transform:translateY(-10px)">
+          <div style="position:relative;width:100%;aspect-ratio:1;animation:mBob {{ p.dur }}s ease-in-out infinite">
+            <image-slot id="{{ p.slot }}" src="{{ p.img }}" shape="rounded" radius="24" fit="contain" placeholder="{{ p.name }}"></image-slot>
+          </div>
+          <div>
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;letter-spacing:-0.03em;margin:0 0 6px">{{ p.name }}</h3>
+            <p style="margin:0;font-size:15px;line-height:1.45">{{ p.desc }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section data-screen-label="Bebida del día" style="padding:0 clamp(20px,5vw,72px) 120px">
+    <div data-reveal="0" style="max-width:1280px;margin:0 auto;background:#ECFA95;color:#111111;border-radius:40px;padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(24px,4vw,48px);align-items:center;position:relative;overflow:hidden">
+      <div style="position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:#111111;opacity:.06"></div>
+      <div style="position:relative;z-index:1">
+        <div style="display:flex;align-items:center;gap:10px;margin:0 0 14px">
+          <p style="font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;margin:0">{{ t.ddKicker }}</p>
+          <span style="padding:5px 12px;border-radius:999px;background:#111111;color:#ECFA95;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">{{ ddBadge }}</span>
+        </div>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(52px,8vw,112px);line-height:.88;letter-spacing:-0.05em;margin:0 0 18px;opacity:{{ ddOp }};transform:translateY({{ ddY }}px);transition:opacity .25s ease,transform .35s cubic-bezier(.2,.7,.2,1)">{{ ddName }}</h2>
+        <p style="margin:0 0 24px;font-size:18px;line-height:1.5;max-width:440px;text-wrap:pretty">{{ t.ddText }}</p>
+        <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:12px 18px;margin:0 0 26px">
+          <span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,60px);letter-spacing:-0.04em;line-height:1">$15.000</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:0 0 28px">
+          <sc-for list="{{ ddDays }}" as="d" hint-placeholder-count="5">
+            <button onClick="{{ d.pick }}" style="position:relative;min-height:72px;padding:10px 4px;border-radius:18px;border:2px solid #111111;background:{{ d.bg }};color:{{ d.fg }};cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:background .25s,color .25s,transform .2s" style-hover="transform:translateY(-3px)">
+              <span style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">{{ d.day }}</span>
+              <span style="font-size:13px;font-weight:600;line-height:1.15;text-align:center">{{ d.drink }}</span>
+              <span style="position:absolute;top:-9px;right:-4px;padding:2px 7px;border-radius:999px;background:#D7A9E3;color:#111111;font-size:10px;font-weight:800;text-transform:uppercase;opacity:{{ d.todayOp }}">{{ t.today }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <button onClick="{{ openOrder }}" style="height:52px;padding:0 26px;border-radius:999px;border:none;background:#111111;color:#ECFA95;font-weight:700;font-size:16px;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)">{{ t.orderNow }}</button>
+      </div>
+      <div style="position:relative;width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center">
+        <div style="position:absolute;width:82%;aspect-ratio:1;border-radius:50%;background:#FFFDED"></div>
+        <sc-for list="{{ ddDays }}" as="d" hint-placeholder-count="1">
+          <img src="{{ d.img }}" alt="{{ d.drink }}" style="position:absolute;height:80%;width:auto;max-width:90%;object-fit:contain;opacity:{{ d.op }};transform:{{ d.tf }};transition:opacity .45s ease,transform .6s cubic-bezier(.2,.8,.2,1);pointer-events:none">
+        </sc-for>
+        <div style="position:absolute;left:0;bottom:6%;padding:12px 16px;border-radius:18px;background:#111111;color:#ECFA95;font-weight:700;font-size:15px;transform:rotate(-6deg);animation:mBob 4.5s ease-in-out infinite">{{ ddSticker }}</div>
+        <img src="assets/brand/mascot-k.png" alt="" style="position:absolute;right:0;top:2%;width:clamp(70px,10vw,110px);animation:mBob 3.6s ease-in-out infinite;pointer-events:none">
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:0 clamp(20px,5vw,72px) 120px">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:18px">
+      <div data-reveal="0" style="background:#141414;color:#FFFDED;border-radius:36px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:space-between;gap:32px;min-height:360px">
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4.5vw,60px);line-height:.95;letter-spacing:-0.04em;margin:0">{{ t.lyHomeTitle }}</h2>
+        <div style="display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:6px;max-width:420px" aria-hidden="true">
+          <sc-for list="{{ homeDots }}" as="d" hint-placeholder-count="10">
+            <span style="aspect-ratio:1;border-radius:50%;background:{{ d.bg }};border:1.5px solid {{ d.bd }};display:block"></span>
+          </sc-for>
+        </div>
+        <p style="margin:0;font-size:17px;line-height:1.5;color:#D9C7B4;max-width:420px">{{ t.lyHomeText }}</p>
+        <div><button onClick="{{ goLoyalty }}" style="height:52px;padding:0 24px;border-radius:999px;border:none;background:#ECFA95;color:#111111;font-weight:700;font-size:16px;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)">{{ t.lyHomeCta }} →</button></div>
+      </div>
+      <div data-reveal="120" style="background:#A7A4E0;color:#111111;border-radius:36px;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-height:360px">
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4.5vw,60px);line-height:.95;letter-spacing:-0.04em;margin:0">{{ t.visitTitle }}</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button onClick="{{ goStores }}" style="height:52px;padding:0 24px;border-radius:999px;border:none;background:#111111;color:#A7A4E0;font-weight:700;font-size:16px;cursor:pointer">{{ t.seeStores }}</button>
+          <button onClick="{{ goFranchise }}" style="height:52px;padding:0 24px;border-radius:999px;border:2px solid #111111;background:transparent;color:#111111;font-weight:700;font-size:16px;cursor:pointer">{{ t.franchiseCta }}</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:0 clamp(20px,5vw,72px) 120px">
+    <div style="max-width:1280px;margin:0 auto">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:32px">
+        <h2 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(40px,6vw,84px);line-height:.95;letter-spacing:-0.04em;margin:0">#NosHaceMushu</h2>
+        <a href="https://www.instagram.com/mushu.coo" target="_blank" style="font-weight:700;font-size:17px;border-bottom:2px solid #141414;padding-bottom:4px">{{ t.followIg }} →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(46%,200px),1fr));gap:12px">
+        <sc-if value="{{ igLive }}" hint-placeholder-val="{{ false }}">
+          <sc-for list="{{ igFeed }}" as="g" hint-placeholder-count="6">
+            <a href="{{ g.href }}" target="_blank" rel="noopener" style="position:relative;display:block;aspect-ratio:1;border-radius:24px;overflow:hidden;background:#EFE7DC;transition:transform .3s" style-hover="transform:scale(.97) rotate(1deg)">
+              <img src="{{ g.img }}" alt="{{ g.alt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+            </a>
+          </sc-for>
+        </sc-if>
+        <sc-if value="{{ igLocal }}" hint-placeholder-val="{{ true }}">
+          <sc-for list="{{ igPosts }}" as="g" hint-placeholder-count="6">
+            <div data-reveal="{{ g.delay }}" style="position:relative;aspect-ratio:1;border-radius:24px;overflow:hidden;transition:transform .3s" style-hover="transform:scale(.97) rotate(1deg)">
+              <image-slot id="{{ g.slot }}" src="{{ g.img }}" fit="cover" shape="rect" placeholder="Post Instagram"></image-slot>
+            </div>
+          </sc-for>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isMenu }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Menú" style="padding:140px clamp(20px,5vw,72px) 120px">
+    <div style="max-width:1280px;margin:0 auto">
+      <h1 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(64px,12vw,180px);line-height:.85;letter-spacing:-0.05em;margin:0 0 20px">{{ t.menuTitle }}</h1>
+      <p data-reveal="80" style="font-size:19px;line-height:1.5;max-width:560px;color:#5A5550;margin:0 0 40px">{{ t.menuSub }}</p>
+      <div style="position:sticky;top:76px;z-index:5;display:flex;gap:8px;overflow-x:auto;padding:10px 0 18px;margin-bottom:24px;scrollbar-width:none;background:#FFFDED">
+        <sc-for list="{{ cats }}" as="c" hint-placeholder-count="4">
+          <button onClick="{{ c.pick }}" style="flex:0 0 auto;height:48px;padding:0 22px;border-radius:999px;border:2px solid #141414;background:{{ c.bg }};color:{{ c.fg }};font-weight:700;font-size:16px;cursor:pointer;transition:background .25s,color .25s">{{ c.label }}</button>
+        </sc-for>
+      </div>
+      <p style="font-size:17px;line-height:1.5;color:#5A5550;max-width:640px;margin:0 0 28px;opacity:{{ listOp }};transition:opacity .25s">{{ catDesc }}</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:18px;opacity:{{ listOp }};transform:translateY({{ listY }}px);transition:opacity .3s ease,transform .4s cubic-bezier(.2,.7,.2,1)">
+        <sc-for list="{{ items }}" as="p" hint-placeholder-count="6">
+          <div style="background:#FFFFFF;border-radius:28px;padding:16px;display:flex;flex-direction:column;gap:14px;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s" style-hover="transform:translateY(-8px);box-shadow:0 24px 40px -20px rgba(20,20,20,.35)">
+            <div style="position:relative;width:100%;aspect-ratio:1;border-radius:20px;background:{{ p.bg }}">
+              <image-slot id="{{ p.slot }}" src="{{ p.img }}" shape="rounded" radius="20" fit="contain" placeholder="{{ p.name }}"></image-slot>
+            </div>
+            <div style="padding:0 6px 6px">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px">
+                <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.03em;margin:0 0 6px">{{ p.name }}</h3>
+                <span style="font-size:12px;font-weight:700;color:#5A5550;white-space:nowrap">{{ p.size }}</span>
+              </div>
+              <p style="margin:0;font-size:15px;line-height:1.45;color:#5A5550">{{ p.desc }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div data-reveal="0" style="margin-top:56px;padding:28px;border-radius:28px;border:2px dashed #141414;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center">
+        <p style="margin:0;font-size:18px;font-weight:600;max-width:640px">{{ t.menuNote }}</p>
+        <button onClick="{{ openOrder }}" style="height:52px;padding:0 26px;border-radius:999px;border:none;background:#141414;color:#FFFDED;font-weight:700;font-size:16px;cursor:pointer">{{ t.orderNow }}</button>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Nosotros" style="padding:140px clamp(20px,5vw,72px) 80px">
+    <div style="max-width:1280px;margin:0 auto">
+      <p data-reveal="0" style="font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:#5B55B8;margin:0 0 12px">{{ t.aboutKicker }}</p>
+      <h1 data-reveal="60" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(56px,10vw,150px);line-height:.88;letter-spacing:-0.05em;margin:0 0 48px;max-width:1100px;text-wrap:balance">{{ t.aboutTitle }}</h1>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:40px;align-items:start">
+        <div data-reveal="0" style="position:relative;width:100%;aspect-ratio:4/5">
+          <img src="assets/brand/oval-k.png" alt="" style="position:absolute;right:-14px;top:-28px;width:clamp(80px,10vw,120px);transform:rotate(10deg);z-index:2;pointer-events:none"><image-slot id="about-founders" src="assets/about/fundadores.jpg" fit="cover" shape="rounded" radius="36" placeholder="Foto Jorge y Angélica en la tienda"></image-slot>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:22px;font-size:19px;line-height:1.6">
+          <p data-reveal="0" style="margin:0;text-wrap:pretty">{{ t.about1 }}</p>
+          <p data-reveal="80" style="margin:0;text-wrap:pretty">{{ t.about2 }}</p>
+          <p data-reveal="160" style="margin:0;text-wrap:pretty">{{ t.about3 }}</p>
+          <p data-reveal="240" style="margin:0;font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;line-height:1.15;letter-spacing:-0.02em;color:#5B55B8">— Jorge &amp; Angélica</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section style="padding:40px clamp(20px,5vw,72px) 80px">
+    <div style="max-width:1280px;margin:0 auto">
+      <h2 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(40px,6vw,84px);line-height:.95;letter-spacing:-0.04em;margin:0 0 40px">{{ t.timelineTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px">
+        <sc-for list="{{ timeline }}" as="e" hint-placeholder-count="4">
+          <div data-reveal="{{ e.delay }}" style="border-top:3px solid #141414;padding-top:20px">
+            <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:44px;letter-spacing:-0.04em;color:#5B55B8">{{ e.year }}</div>
+            <h3 style="font-size:20px;margin:8px 0 6px">{{ e.title }}</h3>
+            <p style="margin:0;font-size:16px;line-height:1.5;color:#5A5550">{{ e.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+  <section style="padding:40px clamp(20px,5vw,72px) 120px">
+    <div style="max-width:1280px;margin:0 auto;background:#141414;color:#FFFDED;border-radius:40px;padding:clamp(32px,5vw,64px)">
+      <h2 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,5vw,68px);line-height:.95;letter-spacing:-0.04em;margin:0 0 40px">{{ t.valuesTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:28px">
+        <sc-for list="{{ values }}" as="v" hint-placeholder-count="4">
+          <div data-reveal="{{ v.delay }}">
+            <div style="width:44px;height:44px;border-radius:50%;background:{{ v.bg }};margin-bottom:16px"></div>
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:26px;letter-spacing:-0.02em;margin:0 0 8px">{{ v.title }}</h3>
+            <p style="margin:0;font-size:16px;line-height:1.5;color:#D9C7B4">{{ v.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isStores }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Tiendas" style="padding:140px clamp(20px,5vw,72px) 120px">
+    <div style="max-width:1280px;margin:0 auto">
+      <h1 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(56px,10vw,150px);line-height:.88;letter-spacing:-0.05em;margin:0 0 20px">{{ t.storesTitle }}</h1>
+      <p data-reveal="80" style="font-size:19px;line-height:1.5;max-width:560px;color:#5A5550;margin:0 0 48px">{{ t.storesSub }}</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px;align-items:stretch">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <sc-for list="{{ stores }}" as="s" hint-placeholder-count="2">
+            <div data-reveal="{{ s.delay }}" onClick="{{ s.pick }}" style="cursor:pointer;background:{{ s.bg }};border-radius:28px;padding:24px;display:flex;flex-direction:column;gap:14px;border:2px solid {{ s.border }};transition:background .3s,border-color .3s,transform .3s" style-hover="transform:translateX(6px)">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+                <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:30px;letter-spacing:-0.03em;margin:0">{{ s.name }}</h3>
+                <span style="padding:6px 12px;border-radius:999px;background:#ECFA95;color:#111111;font-size:13px;font-weight:700">{{ s.tag }}</span>
+              </div>
+              <p style="margin:0;font-size:16px;line-height:1.5">{{ s.addr }}<br>{{ s.hours }}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <a href="{{ s.maps }}" target="_blank" style="height:44px;padding:0 18px;border-radius:999px;background:#141414;color:#FFFDED;font-weight:700;font-size:14px;display:flex;align-items:center">{{ t.directions }}</a>
+                <a href="#" onClick="{{ openOrder }}" style="height:44px;padding:0 18px;border-radius:999px;border:2px solid #141414;font-weight:700;font-size:14px;display:flex;align-items:center">{{ t.order }}</a>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div data-reveal="100" style="border-radius:32px;overflow:hidden;background:{{ cur.bg }};color:#111111;display:flex;flex-direction:column;transition:background .4s">
+          <div style="position:relative;aspect-ratio:4/3;overflow:hidden">
+            <img src="{{ cur.img }}" alt="{{ cur.alias }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ curOp }};transition:opacity .3s">
+          </div>
+          <div style="padding:clamp(22px,3.5vw,40px);opacity:{{ curOp }};transition:opacity .3s">
+            <p style="margin:0 0 8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px">{{ cur.year }} · {{ cur.place }}</p>
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(34px,4vw,52px);line-height:.95;letter-spacing:-0.04em;margin:0 0 16px">{{ cur.alias }}</h3>
+            <p style="margin:0 0 12px;font-size:17px;line-height:1.55">{{ cur.p1 }}</p>
+            <p style="margin:0;font-size:17px;line-height:1.55">{{ cur.p2 }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isFranchise }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Franquicias" style="padding:140px clamp(20px,5vw,72px) 80px">
+    <div style="max-width:1280px;margin:0 auto">
+      <p data-reveal="0" style="font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:#5B55B8;margin:0 0 12px">{{ t.frKicker }}</p>
+      <h1 data-reveal="60" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(52px,9vw,140px);line-height:.88;letter-spacing:-0.05em;margin:0 0 28px;max-width:1100px;text-wrap:balance">{{ t.frTitle }}</h1>
+      <p data-reveal="120" style="font-size:20px;line-height:1.55;max-width:640px;color:#5A5550;margin:0 0 64px">{{ t.frSub }}</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px;margin-bottom:80px">
+        <sc-for list="{{ frFacts }}" as="f" hint-placeholder-count="3">
+          <div data-reveal="{{ f.delay }}" style="background:{{ f.bg }};color:#111111;border-radius:28px;padding:28px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between">
+            <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(40px,5vw,64px);letter-spacing:-0.04em;line-height:1">{{ f.big }}</div>
+            <p style="margin:0;font-size:16px;font-weight:600;line-height:1.4">{{ f.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:40px;align-items:start">
+        <div>
+          <h2 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,5vw,64px);line-height:.95;letter-spacing:-0.04em;margin:0 0 32px">{{ t.frLook }}</h2>
+          <div style="display:flex;flex-direction:column">
+            <sc-for list="{{ frSteps }}" as="s" hint-placeholder-count="4">
+              <div data-reveal="{{ s.delay }}" style="display:flex;gap:20px;padding:22px 0;border-top:2px solid #141414">
+                <span style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#5B55B8">{{ s.n }}</span>
+                <div>
+                  <h3 style="margin:0 0 6px;font-size:21px">{{ s.title }}</h3>
+                  <p style="margin:0;font-size:16px;line-height:1.5;color:#5A5550">{{ s.text }}</p>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div data-reveal="100" style="background:#FFFFFF;border-radius:32px;padding:clamp(24px,4vw,40px)">
+          <sc-if value="{{ frSent }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align:center;padding:40px 0">
+              <div style="width:80px;height:80px;border-radius:50%;background:#A7A4E0;margin:0 auto 20px;animation:mBob 3s ease-in-out infinite"></div>
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:34px;letter-spacing:-0.03em;margin:0 0 8px">{{ t.thanks }}</h3>
+              <p style="margin:0;color:#5A5550;font-size:17px">{{ t.thanksFr }}</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ frForm }}" hint-placeholder-val="{{ true }}">
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:32px;letter-spacing:-0.03em;margin:0 0 24px">{{ t.frFormTitle }}</h3>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <sc-for list="{{ frFields }}" as="f" hint-placeholder-count="4">
+                <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:700">{{ f.label }}
+                  <input data-fr="{{ f.label }}" placeholder="{{ f.ph }}" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid #D9C7B4;background:#FFFDED;font-size:16px;color:#141414;outline:none" style-focus="border-color:#5B55B8">
+                </label>
+              </sc-for>
+              <button onClick="{{ sendFr }}" style="height:56px;margin-top:8px;border-radius:999px;border:none;background:#141414;color:#FFFDED;font-weight:700;font-size:17px;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-2px)">{{ t.send }}</button>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isLoyalty }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Tarjeta de fidelidad" style="padding:140px clamp(20px,5vw,72px) 80px">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(32px,5vw,64px);align-items:center">
+      <div>
+        <p data-reveal="0" style="font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:#5B55B8;margin:0 0 12px">{{ t.lyKicker }}</p>
+        <h1 data-reveal="60" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(52px,8vw,120px);line-height:.88;letter-spacing:-0.05em;margin:0 0 28px;text-wrap:balance">{{ t.lyTitle }}</h1>
+        <p data-reveal="120" style="font-size:clamp(18px,1.6vw,21px);line-height:1.55;max-width:520px;color:#5A5550;margin:0 0 32px;text-wrap:pretty">{{ t.lySub }}</p>
+        <div data-reveal="180" style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="https://loyalty.is/blf52t" target="_blank" rel="noopener" style="height:56px;padding:0 30px;border-radius:999px;background:#141414;color:#FFFDED;font-weight:700;font-size:17px;display:inline-flex;align-items:center;transition:transform .2s" style-hover="transform:translateY(-3px);color:#ECFA95">{{ t.lyJoin }} →</a>
+          <button onClick="{{ goStores }}" style="height:56px;padding:0 30px;border-radius:999px;border:2px solid #141414;background:transparent;color:#141414;font-weight:700;font-size:17px;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)">{{ t.lyFind }}</button>
+        </div>
+      </div>
+      <div data-reveal="100" style="position:relative">
+        <div style="background:#141414;color:#FFFDED;border-radius:36px;padding:clamp(24px,4vw,40px);transform:rotate(-2deg);box-shadow:0 30px 60px -30px rgba(20,20,20,.5)">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:28px">
+            <img src="assets/brand/logo-w.png" alt="Múshu" style="height:40px;width:auto;display:block">
+            <span style="padding:6px 14px;border-radius:999px;background:#A7A4E0;color:#111111;font-size:13px;font-weight:700">{{ t.lyKicker }}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(8px,1.5vw,14px);margin-bottom:24px">
+            <sc-for list="{{ stampDots }}" as="d" hint-placeholder-count="10">
+              <div style="position:relative;aspect-ratio:1;border-radius:50%;background:{{ d.bg }};border:2px dashed {{ d.bd }};display:flex;align-items:center;justify-content:center;transition:background .3s,transform .3s;transform:scale({{ d.sc }})">
+                <img src="assets/brand/mascot-k.png" alt="" style="width:62%;height:62%;object-fit:contain;opacity:{{ d.op }};transition:opacity .3s">
+                <span style="position:absolute;font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;color:#D9C7B4;opacity:{{ d.numOp }}">{{ d.n }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px">
+            <p style="margin:0;font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.02em;color:{{ stampColor }}">{{ stampLabel }}</p>
+            <button onClick="{{ addStamp }}" style="height:48px;padding:0 22px;border-radius:999px;border:none;background:#ECFA95;color:#111111;font-weight:700;font-size:15px;cursor:pointer;transition:transform .2s" style-hover="transform:scale(1.05)">{{ stampBtn }}</button>
+          </div>
+        </div>
+        <img src="assets/brand/stamp-k.png" alt="" style="position:absolute;right:-18px;top:-36px;width:clamp(80px,10vw,120px);animation:mSpin 22s linear infinite;pointer-events:none">
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:40px clamp(20px,5vw,72px) 80px">
+    <div style="max-width:1280px;margin:0 auto">
+      <h2 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(40px,6vw,84px);line-height:.95;letter-spacing:-0.04em;margin:0 0 40px">{{ t.lyHowTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:18px">
+        <sc-for list="{{ lySteps }}" as="s" hint-placeholder-count="3">
+          <div data-reveal="{{ s.delay }}" style="background:#FFFFFF;border-radius:28px;padding:28px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;gap:24px">
+            <div style="width:64px;height:64px;border-radius:50%;background:{{ s.bg }};display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;font-size:26px;color:#111111">{{ s.n }}</div>
+            <div>
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;letter-spacing:-0.03em;margin:0 0 8px">{{ s.title }}</h3>
+              <p style="margin:0;font-size:16px;line-height:1.5;color:#5A5550">{{ s.text }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:40px clamp(20px,5vw,72px) 80px">
+    <div style="max-width:1280px;margin:0 auto;background:#141414;color:#FFFDED;border-radius:40px;padding:clamp(32px,5vw,64px)">
+      <h2 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,5vw,68px);line-height:.95;letter-spacing:-0.04em;margin:0 0 40px">{{ t.lyPerksTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:28px">
+        <sc-for list="{{ lyPerks }}" as="v" hint-placeholder-count="4">
+          <div data-reveal="{{ v.delay }}">
+            <div style="width:44px;height:44px;border-radius:50%;background:{{ v.bg }};margin-bottom:16px"></div>
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:26px;letter-spacing:-0.02em;margin:0 0 8px">{{ v.title }}</h3>
+            <p style="margin:0;font-size:16px;line-height:1.5;color:#D9C7B4">{{ v.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:0 clamp(20px,5vw,72px) 120px">
+    <div data-reveal="0" style="max-width:1280px;margin:0 auto;background:#ECFA95;color:#111111;border-radius:40px;padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px;position:relative;overflow:hidden">
+      <div style="max-width:640px">
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(34px,4.5vw,60px);line-height:.95;letter-spacing:-0.04em;margin:0 0 14px">{{ t.lyCtaTitle }}</h2>
+        <p style="margin:0;font-size:18px;line-height:1.5">{{ t.lyCtaText }}</p>
+      </div>
+      <a href="https://loyalty.is/blf52t" target="_blank" rel="noopener" style="height:56px;padding:0 30px;border-radius:999px;background:#111111;color:#ECFA95;font-weight:700;font-size:17px;display:inline-flex;align-items:center;transition:transform .2s" style-hover="transform:translateY(-3px);color:#ECFA95">{{ t.lyJoin }} →</a>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isEvents }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Eventos" style="position:relative;padding:140px clamp(20px,5vw,72px) 60px;overflow:hidden">
+    <div data-par="0.2" style="position:absolute;top:18%;right:10%;width:26px;height:26px;border-radius:50%;background:#A7A4E0;pointer-events:none"></div>
+    <div data-par="-0.15" style="position:absolute;top:62%;right:34%;width:18px;height:18px;border-radius:50%;background:#ECFA95;pointer-events:none"></div>
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,5vw,64px);align-items:end">
+      <div>
+        <p data-reveal="0" style="font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:#5B55B8;margin:0 0 12px">{{ t.evKicker }}</p>
+        <h1 data-reveal="60" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(52px,8.5vw,128px);line-height:.88;letter-spacing:-0.05em;margin:0;text-wrap:balance">{{ t.evTitleA }}<br><span style="color:#5B55B8">{{ t.evTitleB }}</span></h1>
+      </div>
+      <div>
+        <p data-reveal="120" style="font-size:clamp(18px,1.6vw,21px);line-height:1.55;color:#5A5550;margin:0 0 28px;max-width:520px;text-wrap:pretty">{{ t.evSub }}</p>
+        <div data-reveal="180" style="display:flex;flex-wrap:wrap;gap:12px">
+          <button onClick="{{ goContact }}" style="height:56px;padding:0 30px;border-radius:999px;border:none;background:#141414;color:#FFFDED;font-weight:700;font-size:17px;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)">{{ t.evQuote }} →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="background:#141414;color:#FFFDED;overflow:hidden;padding:20px 0;transform:rotate(1.2deg);margin:20px -20px 80px">
+    <div style="display:flex;width:max-content;animation:mMarquee 30s linear infinite">
+      <sc-for list="{{ evMarquee }}" as="m" hint-placeholder-count="12">
+        <span style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.6vw,44px);letter-spacing:-0.03em;padding:0 26px;white-space:nowrap;display:flex;align-items:center;gap:52px">{{ m }}<span style="width:14px;height:14px;border-radius:50%;background:#A7A4E0;display:block"></span></span>
+      </sc-for>
+    </div>
+  </div>
+
+  <section style="padding:0 clamp(20px,5vw,72px) 80px">
+    <div style="max-width:1280px;margin:0 auto">
+      <h2 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(40px,6vw,84px);line-height:.95;letter-spacing:-0.04em;margin:0 0 40px;max-width:900px;text-wrap:balance">{{ t.evWhereTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:18px">
+        <sc-for list="{{ evCats }}" as="e" hint-placeholder-count="6">
+          <div data-reveal="{{ e.delay }}" style="background:{{ e.bg }};color:#111111;border-radius:32px;padding:16px;display:flex;flex-direction:column;gap:16px;transition:transform .35s cubic-bezier(.2,.7,.2,1)" style-hover="transform:translateY(-8px) rotate(-.6deg)">
+            <div style="position:relative;width:100%;aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:#FFFDED">
+              <image-slot id="{{ e.slot }}" src="{{ e.img }}" fit="cover" shape="rounded" radius="22" placeholder="{{ e.ph }}"></image-slot>
+            </div>
+            <div style="padding:4px 8px 10px">
+              <span style="display:inline-block;padding:5px 12px;border-radius:999px;background:#111111;color:#FFFDED;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px">{{ e.tag }}</span>
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:30px;letter-spacing:-0.03em;line-height:1;margin:0 0 8px">{{ e.title }}</h3>
+              <p style="margin:0;font-size:16px;line-height:1.5">{{ e.text }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:40px clamp(20px,5vw,72px) 80px">
+    <div style="max-width:1280px;margin:0 auto;background:#141414;color:#FFFDED;border-radius:40px;padding:clamp(32px,5vw,64px)">
+      <h2 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,5vw,68px);line-height:.95;letter-spacing:-0.04em;margin:0 0 40px">{{ t.evHowTitle }}</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:28px">
+        <sc-for list="{{ evSteps }}" as="s" hint-placeholder-count="3">
+          <div data-reveal="{{ s.delay }}" style="border-top:2px solid #5A5550;padding-top:20px">
+            <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:44px;letter-spacing:-0.04em;color:{{ s.color }};line-height:1;margin-bottom:12px">{{ s.n }}</div>
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:26px;letter-spacing:-0.02em;margin:0 0 8px">{{ s.title }}</h3>
+            <p style="margin:0;font-size:16px;line-height:1.5;color:#D9C7B4">{{ s.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Simulador eventos" style="padding:40px clamp(20px,5vw,72px) 80px">
+    <div style="max-width:1280px;margin:0 auto">
+      <p data-reveal="0" style="font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:#5B55B8;margin:0 0 12px">{{ t.evSimKicker }}</p>
+      <h2 data-reveal="60" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(40px,6vw,84px);line-height:.95;letter-spacing:-0.04em;margin:0 0 16px">{{ t.evSimTitle }}</h2>
+      <p data-reveal="100" style="font-size:18px;line-height:1.5;color:#5A5550;max-width:600px;margin:0 0 40px">{{ t.evSimSub }}</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:18px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ evSimRows }}" as="r" hint-placeholder-count="3">
+            <div data-reveal="{{ r.delay }}" style="background:{{ r.bg }};color:#111111;border-radius:28px;padding:20px 22px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+              <div style="flex:1 1 200px">
+                <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.02em;margin:0 0 4px">{{ r.name }}</h3>
+                <p style="margin:0 0 6px;font-size:15px;line-height:1.4">{{ r.desc }}</p>
+                <span style="font-size:14px;font-weight:700">{{ r.priceTxt }}</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;background:#FFFDED;border-radius:999px;padding:6px">
+                <button onClick="{{ r.dec }}" aria-label="{{ r.decLabel }}" style="width:44px;height:44px;border-radius:50%;border:none;background:#141414;color:#FFFDED;font-size:22px;font-weight:700;cursor:pointer;line-height:1">−</button>
+                <span style="min-width:56px;text-align:center;font-family:'Outfit',sans-serif;font-weight:800;font-size:26px">{{ r.count }}</span>
+                <button onClick="{{ r.inc }}" aria-label="{{ r.incLabel }}" style="width:44px;height:44px;border-radius:50%;border:none;background:#141414;color:#FFFDED;font-size:22px;font-weight:700;cursor:pointer;line-height:1">+</button>
+              </div>
+            </div>
+          </sc-for>
+          <p style="margin:4px 6px 0;font-size:14px;color:#5A5550">{{ t.evSimStep }}</p>
+        </div>
+        <div data-reveal="120" style="background:#FFFFFF;border-radius:32px;padding:clamp(24px,3.5vw,36px);position:sticky;top:100px">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;letter-spacing:-0.03em;margin:0 0 18px">{{ t.evSimSummary }}</h3>
+          <div style="display:flex;flex-direction:column">
+            <sc-for list="{{ evSimLines }}" as="l" hint-placeholder-count="3">
+              <div style="display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1.5px dashed #D9C7B4;font-size:16px">
+                <span>{{ l.label }}</span><span style="font-weight:700;white-space:nowrap">{{ l.total }}</span>
+              </div>
+            </sc-for>
+            <div style="display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1.5px dashed #D9C7B4;font-size:16px">
+              <span>{{ t.evSimCart }}</span><span style="font-weight:700;white-space:nowrap">{{ evSimCartTxt }}</span>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:20px 0 6px">
+            <span style="font-weight:700;font-size:16px">{{ t.evSimTotal }}</span>
+            <span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,4vw,48px);letter-spacing:-0.04em;line-height:1;color:#5B55B8">{{ evSimTotalTxt }}</span>
+          </div>
+          <p style="margin:0 0 18px;font-size:14px;color:#5A5550;text-align:right">{{ evSimCountTxt }}</p>
+          <div style="background:#ECFA95;border-radius:18px;padding:14px 16px;font-size:14px;line-height:1.5;margin:0 0 20px">{{ t.evSimNote }}</div>
+          <a href="{{ evSimWa }}" target="_blank" rel="noopener" style="height:56px;border-radius:999px;background:#141414;color:#FFFDED;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;transition:transform .2s" style-hover="transform:translateY(-2px);color:#ECFA95">{{ t.evSimSend }} →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:0 clamp(20px,5vw,72px) 120px">
+    <div data-reveal="0" style="max-width:1280px;margin:0 auto;background:#A7A4E0;color:#111111;border-radius:40px;padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px;position:relative;overflow:hidden">
+      <div style="max-width:640px;position:relative;z-index:1">
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(34px,4.5vw,60px);line-height:.95;letter-spacing:-0.04em;margin:0 0 14px">{{ t.evCtaTitle }}</h2>
+        <p style="margin:0;font-size:18px;line-height:1.5">{{ t.evCtaText }}</p>
+      </div>
+      <button onClick="{{ goContact }}" style="position:relative;z-index:1;height:56px;padding:0 30px;border-radius:999px;border:none;background:#111111;color:#A7A4E0;font-weight:700;font-size:17px;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)">{{ t.evQuote }} →</button>
+      <img src="assets/brand/mascot-k.png" alt="" style="position:absolute;right:clamp(12px,3vw,40px);bottom:-18px;width:clamp(70px,9vw,110px);opacity:.9;animation:mBob 3.6s ease-in-out infinite;pointer-events:none">
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Contacto" style="padding:140px clamp(20px,5vw,72px) 120px">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;align-items:start">
+      <div>
+        <h1 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(56px,10vw,140px);line-height:.88;letter-spacing:-0.05em;margin:0 0 24px">{{ t.contactTitle }}</h1>
+        <p data-reveal="80" style="font-size:19px;line-height:1.5;color:#5A5550;margin:0 0 40px;max-width:460px">{{ t.contactSub }}</p>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <sc-for list="{{ channels }}" as="c" hint-placeholder-count="4">
+            <a data-reveal="{{ c.delay }}" href="{{ c.href }}" target="_blank" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:20px 0;border-top:2px solid #141414;font-size:20px;font-weight:700;transition:padding .25s" style-hover="padding-left:12px">
+              <span>{{ c.label }}</span><span style="font-weight:500;font-size:16px;color:#5A5550">{{ c.value }} →</span>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+      <div data-reveal="100" style="background:#FFFFFF;border-radius:32px;padding:clamp(24px,4vw,40px)">
+        <sc-if value="{{ ctSent }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:40px 0">
+            <div style="width:80px;height:80px;border-radius:50%;background:#ECFA95;margin:0 auto 20px;animation:mBob 3s ease-in-out infinite"></div>
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:34px;letter-spacing:-0.03em;margin:0 0 8px">{{ t.thanks }}</h3>
+            <p style="margin:0;color:#5A5550;font-size:17px">{{ t.thanksCt }}</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ ctForm }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:700">{{ t.fName }}
+              <input data-ct="Nombre" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid #D9C7B4;background:#FFFDED;font-size:16px;color:#141414;outline:none" style-focus="border-color:#5B55B8">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:700">{{ t.fEmail }}
+              <input type="email" data-ct="Correo" style="height:52px;padding:0 16px;border-radius:14px;border:1.5px solid #D9C7B4;background:#FFFDED;font-size:16px;color:#141414;outline:none" style-focus="border-color:#5B55B8">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:700">{{ t.fMsg }}
+              <textarea data-ct="Mensaje" rows="5" style="padding:14px 16px;border-radius:14px;border:1.5px solid #D9C7B4;background:#FFFDED;font-size:16px;color:#141414;outline:none;resize:vertical" style-focus="border-color:#5B55B8"></textarea>
+            </label>
+            <button onClick="{{ sendCt }}" style="height:56px;margin-top:8px;border-radius:999px;border:none;background:#141414;color:#FFFDED;font-weight:700;font-size:17px;cursor:pointer">{{ t.send }}</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<footer style="background:#141414;color:#FFFDED;padding:80px clamp(20px,5vw,72px) 32px;border-radius:40px 40px 0 0;overflow:hidden">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:40px;margin-bottom:64px">
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:32px;line-height:1;letter-spacing:-0.03em;margin:0 0 12px">{{ t.footHi }}</p>
+        <button onClick="{{ openOrder }}" style="height:48px;padding:0 22px;border-radius:999px;border:none;background:#ECFA95;color:#111111;font-weight:700;font-size:15px;cursor:pointer">{{ t.orderNow }}</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+          <a href="#" onClick="{{ n.go }}" style="color:#D9C7B4;font-size:16px" style-hover="color:#ECFA95">{{ n.label }}</a>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:16px;color:#D9C7B4">
+        <a href="https://www.instagram.com/mushu.coo" style="color:inherit" style-hover="color:#ECFA95" target="_blank">Instagram</a><a href="https://www.tiktok.com/@mushu.coo" style="color:inherit" style-hover="color:#ECFA95" target="_blank">TikTok</a><a href="https://www.facebook.com/mushu.coo/" style="color:inherit" style-hover="color:#ECFA95" target="_blank">Facebook</a><a href="https://www.rappi.com.co/restaurantes/900401333-mushu-bubble-tea-and-coffee" style="color:inherit" style-hover="color:#ECFA95" target="_blank">Rappi</a><a href="https://oia.didiglobal.com/dlp/8QXj9N" style="color:inherit" style-hover="color:#ECFA95" target="_blank">DiDi Food</a>
+      </div>
+    </div>
+    
+    <div style="font-family: 'Outfit',sans-serif; font-weight: 800; font-size: clamp(80px,15vw,380px); line-height: .75; letter-spacing: -0.06em; color: #FFFDED; margin-bottom: 24px">MÚSHU</div><div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:#D9C7B4">
+      <span>© 2026 Mushu Bubble Tea · {{ t.madeIn }}</span><span>{{ t.footNote }}</span>
+    </div>
+  </div>
+</footer>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const T = {
+  es: {
+    langBtn:'EN', order:'Pedir', orderNow:'Pide ya', seeMenu:'Ver el menú', fullMenu:'Menú completo',
+    orderTitle:'¿Por dónde lo pides?', orderSub:'Tu bubble tea llega a casa. Elige tu app.',
+    madeIn:'Hecho en Cali', heroTag:'Bubble tea · coffee · experiencias culturales',
+    heroA:'Experiencias', heroB:'culturales', heroP:'Somos una tienda de bubble tea y café donde Asia y Colombia se encuentran. Mezclamos sabores, texturas y toppings que se mastican para que cada visita se sienta como un pequeño viaje. ¡Ven, te guiamos!',
+    sticker:'+ tapioca', howKicker:'¿Primera vez?', howTitle:'Bubble tea en 4 pasos. Te guiamos en cada uno.',
+    sigTitle:'Las de la casa', ddKicker:'Bebida del día', today:'hoy', ddText:'No te tomes siempre lo mismo. Cada día tenemos una bebida diferente a precio especial para que te animes a probar todos los sabores.', ddToday:'Hoy',
+    lyHomeTitle:'Cada visita suma.', lyHomeText:'Con tu tarjeta de fidelidad ganas un sello cada vez que vienes. Completa 10 y la siguiente bebida va por nuestra cuenta.', lyHomeCta:'Conoce tu tarjeta',
+    lyKicker:'Tarjeta de fidelidad', lyJoin:'Quiero mi tarjeta', lyTitle:'Entre más vienes, más ganas.', lySub:'Es nuestra forma de darte las gracias por volver. Tu tarjeta vive en tu celular: nada de papelitos que se pierden.', lyFind:'Encuentra tu tienda',
+    lyTry:'Toca para sumar un sello', lyAgain:'Empezar de nuevo', lyOf:'de 10 sellos', lyFull:'¡Bebida gratis!',
+    lyHowTitle:'Así de fácil', lyPerksTitle:'Lo que te llevas', lyCtaTitle:'¿Todavía no tienes la tuya?', lyCtaText:'Regístrate aquí en menos de un minuto, guárdala en tu celular y empieza a sumar sellos desde tu próxima visita.',
+    evKicker:'Eventos', evTitleA:'Llevamos Mushu', evTitleB:'a tu evento.', evSub:'En estos años hemos puesto nuestra barra de bubble tea en lanzamientos de ropa, canchas de pádel, conciertos, ferias, bodas y cumpleaños. Tú pones el plan, nosotros ponemos el sabor.', evQuote:'Cotiza tu evento',
+    evWhereTitle:'Dónde nos has visto', evHowTitle:'Así lo armamos contigo', evCtaTitle:'¿Tienes un evento en mente?', evCtaText:'Cuéntanos qué estás planeando y armamos algo a tu medida. Te respondemos rapidito.',
+    evSimKicker:'Simulador', evSimTitle:'Calcula tu evento', evSimSub:'Escoge cuántas bebidas quieres y te mostramos un valor aproximado. Todas van en vaso de 12 oz.', evSimStep:'Cada toque suma o resta 10 bebidas.',
+    evSimSummary:'Tu estimado', evSimCart:'Carrito y transporte', evSimTotal:'Total estimado', evSimDrinks:'bebidas en total', evSimEach:'c/u',
+    evSimNote:'Ojo: esto es un estimado. Para la cotización final envíanos la fecha, el lugar, cuántas personas van y todo lo que necesitas para tu evento.', evSimSend:'Enviar por WhatsApp',
+    visitTitle:'Ven a probarla en persona.', seeStores:'Ver tiendas', franchiseCta:'Franquicias', followIg:'Síguenos en Instagram',
+    menuTitle:'Menú', menuSub:'Todas en tamaño S (16 oz) o M (22 oz). Escoge tu topping y ajusta el dulzor.',
+    menuNote:'¿No sabes cuál pedir? En tienda te damos hasta 3 recomendaciones según lo que te gusta.',
+    aboutKicker:'Nuestra historia', aboutTitle:'No nacimos en el mall.',
+    about1:'Mushu empezó con una curiosidad: bebidas distintas a las de siempre en Cali. Conocimos el bubble tea por redes y por amigos que vivían afuera, y en un viaje a México lo probamos bien hecho: calidad, presentación y concepto.',
+    about2:'Al volver, buscamos algo igual aquí y no lo encontramos. Pocas tiendas, poco cuidado, poca identidad. Así que lo hicimos nosotros, en un local pequeñito, con unas mesas y muchas ganas.',
+    about3:'Hoy somos dos tiendas propias y un equipo que explica, guía y recomienda, porque para nosotros vale más vender bien que vender mucho.',
+    timelineTitle:'De una idea a dos tiendas', valuesTitle:'Lo que no negociamos',
+    storesTitle:'Tiendas', storiesTitle:'Nuestra historia, tienda por tienda', storesSub:'Nuestras dos tiendas en Cali. Nos ves llenos de 4 a 8 p. m.: esa es la hora Mushu.', directions:'Cómo llegar',
+    frKicker:'Franquicias', frTitle:'No franquiciamos desorden. Franquiciamos método.', frSub:'Crecemos despacio, con recetas estandarizadas, procesos auditables y un equipo formado en la cultura Mushu. Si eso te suena, hablemos.',
+    frLook:'Qué buscamos', frFormTitle:'Quiero una Mushu', send:'Enviar', thanks:'¡Recibido!', thanksFr:'Te escribimos en los próximos días.', thanksCt:'Te respondemos pronto.',
+    contactTitle:'Hablemos', contactSub:'Pedidos para eventos, alianzas, prensa o simplemente decir hola.', fName:'Nombre', fEmail:'Correo', fMsg:'Mensaje',
+    footHi:'¿Antojo de bubble tea?', footNote:'Premium, divertido y con raíz asiática.'
+  },
+  en: {
+    langBtn:'ES', order:'Order', orderNow:'Order now', seeMenu:'See the menu', fullMenu:'Full menu',
+    orderTitle:'Where do you order?', orderSub:'Bubble tea delivered. Pick your app.',
+    madeIn:'Made in Cali', heroTag:'Bubble tea · coffee · cultural experiences',
+    heroA:'Cultural', heroB:'experiences', heroP:'We’re a bubble tea and coffee shop where Asia meets Colombia. We mix flavors, textures and chewy toppings so every visit feels like a little trip. Come by, we’ll guide you!',
+    sticker:'+ tapioca', howKicker:'First time?', howTitle:'Bubble tea in 4 steps. We guide you through each one.',
+    sigTitle:'House specials', ddKicker:'Drink of the day', today:'today', ddText:'Don’t always drink the same thing. Every day we have a different drink at a special price so you can try every flavor.', ddToday:'Today',
+    lyHomeTitle:'Every visit counts.', lyHomeText:'With your loyalty card you get a stamp every time you come by. Fill 10 and your next drink is on us.', lyHomeCta:'Meet your card',
+    lyKicker:'Loyalty card', lyJoin:'Get my card', lyTitle:'The more you come, the more you get.', lySub:'It’s our way of saying thanks for coming back. Your card lives on your phone: no paper cards to lose.', lyFind:'Find your store',
+    lyTry:'Tap to add a stamp', lyAgain:'Start over', lyOf:'of 10 stamps', lyFull:'Free drink!',
+    lyHowTitle:'Easy as that', lyPerksTitle:'What you get', lyCtaTitle:'Don’t have yours yet?', lyCtaText:'Sign up here in under a minute, save it on your phone and start collecting stamps on your next visit.',
+    evKicker:'Events', evTitleA:'We bring Mushu', evTitleB:'to your event.', evSub:'Over the years we’ve set up our bubble tea bar at fashion launches, padel courts, concerts, fairs, weddings and birthdays. You bring the plan, we bring the flavor.', evQuote:'Get a quote',
+    evWhereTitle:'Where you’ve seen us', evHowTitle:'How we plan it with you', evCtaTitle:'Got an event in mind?', evCtaText:'Tell us what you’re planning and we’ll put together something just for you. We reply fast.',
+    evSimKicker:'Simulator', evSimTitle:'Price your event', evSimSub:'Pick how many drinks you want and we’ll show you a ballpark price. All served in 12 oz cups.', evSimStep:'Each tap adds or removes 10 drinks.',
+    evSimSummary:'Your estimate', evSimCart:'Cart and transport', evSimTotal:'Estimated total', evSimDrinks:'drinks in total', evSimEach:'each',
+    evSimNote:'Heads up: this is just an estimate. For a final quote, send us the date, place, number of guests and everything your event needs.', evSimSend:'Send via WhatsApp',
+    visitTitle:'Come try it in person.', seeStores:'See stores', franchiseCta:'Franchising', followIg:'Follow us on Instagram',
+    menuTitle:'Menu', menuSub:'All in S (16 oz) or M (22 oz). Pick your topping and set your sweetness.',
+    menuNote:'Not sure what to order? In store we’ll give you up to 3 picks based on what you like.',
+    aboutKicker:'Our story', aboutTitle:'We weren’t born in a mall.',
+    about1:'Mushu started with curiosity: drinks unlike the usual ones in Cali. We found bubble tea online and through friends living abroad, and on a trip to Mexico we tried it done right: quality, presentation and concept.',
+    about2:'Back home we looked for the same and couldn’t find it. Few shops, little care, no identity. So we made it ourselves, in a tiny spot with a few tables and a lot of drive.',
+    about3:'Today we’re two stores and a team that explains, guides and recommends, because selling well matters more to us than selling a lot.',
+    timelineTitle:'From an idea to two stores', valuesTitle:'What we don’t negotiate',
+    storesTitle:'Stores', storiesTitle:'Our story, store by store', storesSub:'Our two stores in Cali. Busiest from 4 to 8 p.m.: that’s Mushu hour.', directions:'Directions',
+    frKicker:'Franchising', frTitle:'We don’t franchise chaos. We franchise method.', frSub:'We grow slowly, with standardized recipes, auditable processes and a team trained in Mushu culture. If that sounds right, let’s talk.',
+    frLook:'What we look for', frFormTitle:'I want a Mushu', send:'Send', thanks:'Got it!', thanksFr:'We’ll reach out in the next few days.', thanksCt:'We’ll reply soon.',
+    contactTitle:'Let’s talk', contactSub:'Event orders, partnerships, press, or just saying hi.', fName:'Name', fEmail:'Email', fMsg:'Message',
+    footHi:'Craving bubble tea?', footNote:'Premium, playful, Asian at heart.'
+  }
+};
+const C = { taro:'#D7A9E3', mango:'#ECFA95', pink:'#86C8BC', milk:'#DBC8B6' };
+const MENU = {
+  signature:{ es:'Licuadas, cremosas y coronadas con cheese foam.', en:'Blended, creamy and crowned with cheese foam.', bg:C.taro, items:[
+    ['Fresa Foam','Fresa, frutos rojos, crema de coco y cheese foam.','Strawberry, berries, coconut cream and cheese foam.'],
+    ['Mango Foam','Mango, crema de coco y cheese foam.','Mango, coconut cream and cheese foam.'],
+    ['Taroreo','Taro cremoso con galleta Oreo triturada.','Creamy taro with crushed Oreo.'],
+    ['Limonada de Coco','Coco, limón fresco y coco rallado.','Coconut, fresh lime and shredded coconut.'],
+    ['Piña Colada','Piña, crema de coco y un toque de vainilla.','Pineapple, coconut cream and a hint of vanilla.']]},
+  milk:{ es:'Té o base especial con leche, hielo y tu topping.', en:'Tea or specialty base with milk, ice and your topping.', bg:C.milk, items:[
+    ['Brown Sugar','Tapioca, leche, brown sugar y cheese foam.','Tapioca, milk, brown sugar and cheese foam.'],
+    ['Taro','El morado que todos preguntan. Dulce y cremoso.','The purple one everyone asks about. Sweet and creamy.'],
+    ['Matcha','Matcha disuelto al momento con leche.','Matcha whisked to order with milk.'],
+    ['Black Milk Tea','Té negro, leche y borde de caramelo.','Black tea, milk and a caramel rim.'],
+    ['Chai','Especiado, licuado y con canela.','Spiced, blended and dusted with cinnamon.'],
+    ['Chocolate','Chocolate licuado con salsa de chocolate.','Blended chocolate with chocolate drizzle.'],
+    ['Coco','Coco cremoso con borde de arequipe.','Creamy coconut with a dulce de leche rim.'],
+    ['Coffee Milk Tea','Doble espresso, leche y caramelo.','Double espresso, milk and caramel.']]},
+  fruit:{ es:'Té frío agitado con fruta y limón fresco.', en:'Shaken iced tea with fruit and fresh lime.', bg:C.mango, items:[
+    ['Passion Fruit','Jasmine green tea, maracuyá y naranja.','Jasmine green tea, passion fruit and orange.'],
+    ['Lychee','Jasmine green tea y lychee.','Jasmine green tea and lychee.'],
+    ['Mango Tea','Jasmine green tea y mango.','Jasmine green tea and mango.'],
+    ['Tamarindo','Té negro con tamarindo y limón.','Black tea with tamarind and lime.'],
+    ['Frutos Rojos','Té negro, frutos rojos, moras y arándanos.','Black tea, berries, blackberries and blueberries.'],
+    ['Flor de Jamaica','Té negro con flor de Jamaica.','Black tea with hibiscus.']]},
+  soda:{ es:'Burbujas sobre burbujas: soda, sirope y fruta.', en:'Bubbles on bubbles: soda, syrup and fruit.', bg:C.pink, items:[
+    ['Soda Lychee','Soda, lychee y limón.','Soda, lychee and lime.'],
+    ['Frutos Amarillos','Soda, maracuyá y naranja.','Soda, passion fruit and orange.'],
+    ['Soda Frutos Rojos','Soda, frutos rojos y limón.','Soda, berries and lime.']]},
+  sides:{ es:'Para acompañar: waffle de pandebono, croffles y mochis.', en:'On the side: pandebono waffle, croffles and mochis.', bg:C.milk, items:[
+    ['Waffle de Pandebono','La receta de pandebono del abuelo, hecha waffle. Quesito por dentro, crocante por fuera.','Grandpa’s pandebono recipe turned into a waffle. Cheesy inside, crisp outside.'],
+    ['Croffle Almendras','Croissant hecho waffle, con chocolate y almendras.','A croissant turned waffle, with chocolate and almonds.'],
+    ['Croffle Oreo','Croissant hecho waffle, con chocolate y galleta Oreo.','A croissant turned waffle, with chocolate and Oreo crumbs.'],
+    ['Mochis','Helado envuelto en masa de arroz: taro, lulo, piña colada y yogurt de frutos rojos.','Ice cream wrapped in rice dough: taro, lulo, piña colada and berry yogurt.']]}};
+const CAT_LABEL = { signature:['Signature','Signature'], milk:['Milk Tea','Milk Tea'], fruit:['Frutales','Fruit Tea'], soda:['Sodas','Sodas'], sides:['Para acompañar','Sides'] };
+const IMG = {'Fresa Foam':'d7','Mango Foam':'d18','Taroreo':'d8','Limonada de Coco':'d6','Piña Colada':'d2','Brown Sugar':'d10','Taro':'d17','Matcha':'d11','Black Milk Tea':'d16','Chocolate':'d13','Coco':'d9','Coffee Milk Tea':'d12','Passion Fruit':'d4','Mango Tea':'d3','Tamarindo':'d1','Frutos Rojos':'d5','Waffle de Pandebono':'d19','Croffle Almendras':'d20','Croffle Oreo':'d21'};
+const imgOf = n => IMG[n] ? 'assets/drinks/'+IMG[n]+'.png' : '';
+const slug = s => s.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'-');
+
+const DD = [['Lun','Mon','Tamarindo','Tamarind','d1','Para quitarte el calor','To beat the heat'],['Mar','Tue','Matcha','Matcha','d11','Pura energía','Pure energy'],['Mié','Wed','Coffee','Coffee','d12','Para la tarde','For the afternoon'],['Jue','Thu','Chai','Chai','d16','Para darte un gustico','To treat yourself'],['Vie','Fri','Mango','Mango','d3','Algo dulce','Something sweet']];
+const WD = new Date().getDay(); const TODAY = WD>=1 && WD<=5 ? WD-1 : -1;
+// Pega aquí la URL del feed JSON de Behold (https://feeds.behold.so/XXXX). Vacío = se muestran las fotos locales.
+const BEHOLD_FEED = 'https://feeds.behold.so/ftumVn8TMMndukxuxAzj';
+class Component extends DCLogic {
+  state = { evQ:[30,50,20], stamps:6, dd: Math.max(TODAY,0), ddOp:1, page:'home', lang:'es', menuOpen:false, orderOpen:false, fade:1, cat:'signature', listOp:1, scrolled:false, store:0, frSent:false, ctSent:false };
+
+  componentDidMount() {
+    this.io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'none'; this.io.unobserve(e.target); }
+    }), { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    this.onScroll = () => {
+      const y = window.scrollY;
+      document.querySelectorAll('[data-par]').forEach(el => { el.style.transform = `translateY(${y * parseFloat(el.dataset.par)}px)`; });
+      const s = y > 30; if (s !== this.state.scrolled) this.setState({ scrolled: s });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    setTimeout(() => this.setupReveal(), 50);
+    if (BEHOLD_FEED) {
+      fetch(BEHOLD_FEED).then(r => r.json()).then(d => {
+        const posts = (d.posts || []).slice(0, 6).map(p => ({
+          href: p.permalink,
+          img: (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl) || p.thumbnailUrl || p.mediaUrl,
+          alt: (p.prunedCaption || p.caption || 'Post de Instagram de Mushu').slice(0, 120)
+        })).filter(p => p.img);
+        if (posts.length) this.setState({ igFeed: posts });
+      }).catch(() => {});
+    }
+  }
+  componentDidUpdate() { setTimeout(() => this.setupReveal(), 30); }
+  componentWillUnmount() { window.removeEventListener('scroll', this.onScroll); this.io && this.io.disconnect(); }
+  setupReveal() {
+    document.querySelectorAll('[data-reveal]:not([data-rv])').forEach(el => {
+      el.setAttribute('data-rv', '1');
+      const d = parseInt(el.getAttribute('data-reveal')) || 0;
+      el.style.opacity = '0'; el.style.transform = 'translateY(40px)';
+      el.style.transition = `opacity .8s cubic-bezier(.2,.7,.2,1) ${d}ms, transform .9s cubic-bezier(.2,.7,.2,1) ${d}ms`;
+      this.io.observe(el);
+    });
+  }
+  go(p) {
+    this.setState({ menuOpen:false, orderOpen:false });
+    if (p === this.state.page) { window.scrollTo({ top:0, behavior:'smooth' }); return; }
+    this.setState({ fade:0 });
+    setTimeout(() => { window.scrollTo(0, 0); this.setState({ page:p, fade:1 }); }, 380);
+  }
+  sendForm(sel, subject, flag) {
+    const data = {};
+    document.querySelectorAll(sel).forEach(el => { const k = el.getAttribute(sel.slice(1,-1)); data[k] = (el.value || '').trim(); });
+    if (!Object.values(data).some(v => v)) return;
+    const to = 'mushububbletea@outlook.com';
+    const mailto = () => { const body = Object.entries(data).map(([k,v]) => k+': '+v).join('\n'); window.location.href = 'mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); };
+    fetch('https://formsubmit.co/ajax/'+to, { method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' }, body: JSON.stringify({ ...data, _subject: subject, _template:'table', _captcha:'false' }) })
+      .then(r => { if (!r.ok) throw new Error(); this.setState({ [flag]: true }); })
+      .catch(() => { mailto(); this.setState({ [flag]: true }); });
+  }
+  pickDD(i) {
+    if (i === this.state.dd) return;
+    this.setState({ ddOp:0 });
+    setTimeout(() => this.setState({ dd:i, ddOp:1 }), 200);
+  }
+  pickCat(c) {
+    if (c === this.state.cat) return;
+    this.setState({ listOp:0 });
+    setTimeout(() => this.setState({ cat:c, listOp:1 }), 220);
+  }
+
+  renderVals() {
+    const s = this.state, L = s.lang, t = T[L], P = s.page;
+    const nav = [['home',{es:'Inicio',en:'Home'}],['menu',{es:'Menú',en:'Menu'}],['about',{es:'Nosotros',en:'About'}],['stores',{es:'Tiendas',en:'Stores'}],['events',{es:'Eventos',en:'Events'}],['loyalty',{es:'Tarjeta de fidelidad',en:'Loyalty card'}],['franchise',{es:'Franquicias',en:'Franchise'}],['contact',{es:'Contacto',en:'Contact'}]];
+    const navItems = nav.map(([k,l],i) => ({ label:l[L], num:'0'+(i+1), go:e=>{e&&e.preventDefault();this.go(k);}, color: k===P?'#ECFA95':'#FFFDED', delay: s.menuOpen ? 150+i*60 : 0 }));
+    const ALL = Object.values(MENU).flatMap(c => c.items);
+    const HOUSE = ['Taro','Mango Foam','Fresa Foam','Taroreo','Limonada de Coco','Piña Colada'];
+    const sig = HOUSE.map(n => ALL.find(it => it[0]===n)).map((it,i) => ({ name:it[0], desc:L==='es'?it[1]:it[2], slot:'p-'+slug(it[0]), img:imgOf(it[0]), bg:[C.taro,C.mango,C.pink,C.milk,C.pink,C.mango][i], delay:i*80, dur:(3.6+i*0.4).toFixed(1) }));
+    const cm = MENU[s.cat];
+    const items = cm.items.map(it => ({ name:it[0], desc:L==='es'?it[1]:it[2], slot:'p-'+slug(it[0]), img:imgOf(it[0]), bg:cm.bg, size: s.cat==='sides' ? '' : 'S · M' }));
+    const ES = L==='es';
+    const stores = [
+      { name:'La Casita', tag:ES?'Miraflores · La original':'Miraflores · The original', addr:'Cra. 24E #4-93, Miraflores, Cali', hours:ES?'Todos los días · 3:00 a 8:00 p. m.':'Every day · 3:00–8:00 p.m.', q:'3.4400371,-76.5453746', maps:'https://maps.app.goo.gl/JhbziFFVwb3cCy3L6' },
+      { name:'Lago Verde', tag:ES?'Pance · La nueva':'Pance · The new one', addr:'Parque Comercial Lago Verde, Cl. 16A #122-178, Pance, Cali', hours:ES?'Todos los días · 2:00 a 8:30 p. m.':'Every day · 2:00–8:30 p.m.', q:'3.3420511,-76.5355508', maps:'https://maps.app.goo.gl/zic3oam95gZEHB576' }
+    ].map((x,i) => ({ ...x, delay:i*100, bg: i===s.store?'#FFFFFF':'transparent', border: i===s.store?'#141414':'#D9C7B4', pick:()=>{ if (i===s.store) return; this.setState({storeOp:0}); setTimeout(()=>this.setState({store:i, storeOp:1}),250); } }));
+    const stories = (ES?[
+      ['2023','Miraflores','La Casita','En 2023 aquí empezó todo. Convertimos un apartaestudio en un local, sacamos unas mesas a la calle y la gente empezó a llegar, poco a poco.','Así se volvió La Casita: el lugar donde la gente se reúne a conversar, a tomarse algo rico sin afán y a disfrutar la brisa caleña de la tarde. Cuando abrimos Lago Verde nos dio miedo que dejaran de venir. No pasó: siguen llegando, y eso lo agradecemos todos los días.','Foto de La Casita (fachada o mesas afuera)'],
+      ['2025','Pance','Lago Verde','Después de muchas ferias en el sur de la ciudad, en 2025 nos arriesgamos a abrir en Pance. Siempre quisimos un lugar que representara lo que somos.','Lo encontramos en Lago Verde: un parque comercial rodeado de naturaleza, donde llegan familias, amigos, deportistas y hasta sus mascotas. Por eso aquí también tenemos paletas para perro.','Foto de Mushu Lago Verde']
+    ]:[
+      ['2023','Miraflores','La Casita','It all started here in 2023. We turned a studio apartment into a shop, put a few tables out on the street, and little by little people started coming.','That’s how it became La Casita: the place where people meet to talk, enjoy a good drink with no rush and feel the Cali afternoon breeze. When we opened Lago Verde we were afraid people would stop coming. They didn’t, and we’re grateful every single day.','La Casita photo (front or street tables)'],
+      ['2025','Pance','Lago Verde','After many fairs in the south of the city, in 2025 we took the leap and opened in Pance. We always wanted a place that showed who we are.','We found it in Lago Verde: a shopping park surrounded by nature, where families, friends, athletes and even their pets come by. That’s why we also have dog popsicles here.','Mushu Lago Verde photo']
+    ]).map((x,i)=>({ year:x[0], place:x[1], alias:x[2], p1:x[3], p2:x[4], ph:x[5], slot:'story-'+['casita','lagoverde'][i], img:'assets/stores/'+['casita','lagoverde'][i]+'.jpg', bg:['#ECFA95','#86C8BC'][i], delay:i*100 }));
+    const mq = L==='es' ? ['Milk tea','Tapioca','Taro','Cheese foam','Matcha','Lychee'] : ['Milk tea','Tapioca','Taro','Cheese foam','Matcha','Lychee'];
+    const di = s.dd, es = L==='es';
+    const ddDays = DD.map((d,i) => ({ day: es?d[0]:d[1], drink: es?d[2]:d[3], img:'assets/drinks/'+d[4]+'.png', pick:()=>this.pickDD(i),
+      bg: i===di?'#111111':'transparent', fg: i===di?'#ECFA95':'#111111', todayOp: i===TODAY?1:0,
+      op: i===di?1:0, tf: i===di?'translateY(0) rotate(0deg) scale(1)':(i<di?'translateX(-30%) rotate(-12deg) scale(.85)':'translateX(30%) rotate(12deg) scale(.85)') }));
+    return {
+      ddDays, ddName: es?DD[di][2]:DD[di][3], ddOp:s.ddOp, ddY: s.ddOp?0:14,
+      ddBadge: di===TODAY ? t.ddToday : (es?DD[di][0]:DD[di][1]),
+      ddSticker: es?DD[di][5]:DD[di][6],
+      homeDots: Array.from({length:10},(_,i)=>({ bg: i<6?'#ECFA95':'transparent', bd: i<6?'#ECFA95':'#5A5550' })),
+      stampDots: Array.from({length:10},(_,i)=>({ n:i+1, bg: i<s.stamps?(i===9?'#D7A9E3':'#ECFA95'):'transparent', bd: i<s.stamps?'transparent':'#5A5550', op: i<s.stamps?1:0, numOp: i<s.stamps?0:1, sc: i===s.stamps-1?1.08:1 })),
+      stampLabel: s.stamps>=10 ? t.lyFull : s.stamps+' '+t.lyOf, stampColor: s.stamps>=10 ? '#D7A9E3' : '#FFFDED',
+      stampBtn: s.stamps>=10 ? t.lyAgain : t.lyTry,
+      addStamp:()=>this.setState({ stamps: s.stamps>=10 ? 0 : s.stamps+1 }),
+      goLoyalty:()=>this.go('loyalty'), isLoyalty:P==='loyalty',
+      isEvents:P==='events', goContact:()=>this.go('contact'),
+      ...(()=>{
+        const fmt = n => '$'+n.toLocaleString('es-CO');
+        const SIM = es ? [['Sodas','Soda con fruta y sirope. Burbujeante y fresca.',10000],['Milk tea con tapioca','El clásico: té, leche y perlas de tapioca.',13000],['Especiales','Taro, matcha y otras de la casa.',14000]]
+                       : [['Sodas','Soda with fruit and syrup. Bubbly and fresh.',10000],['Milk tea with tapioca','The classic: tea, milk and tapioca pearls.',13000],['Specials','Taro, matcha and other house drinks.',14000]];
+        const q = s.evQ, CART = 200000;
+        const setQ = (i,d) => { const n = [...this.state.evQ]; n[i] = Math.max(0, Math.min(500, n[i]+d)); this.setState({ evQ:n }); };
+        const rows = SIM.map((x,i)=>({ name:x[0], desc:x[1], priceTxt: fmt(x[2])+' '+t.evSimEach, count:q[i], dec:()=>setQ(i,-10), inc:()=>setQ(i,10), decLabel:'− 10 '+x[0], incLabel:'+ 10 '+x[0], delay:i*80, bg:[C.pink,C.milk,C.taro][i] }));
+        const lines = SIM.map((x,i)=>({ label:q[i]+' × '+x[0], total:fmt(q[i]*x[2]), n:q[i] })).filter(l=>l.n>0);
+        const drinks = q.reduce((a,b)=>a+b,0);
+        const total = SIM.reduce((a,x,i)=>a+q[i]*x[2],0) + (drinks>0?CART:0);
+        const msg = (es?'¡Hola Mushu! Quiero cotizar un evento:\n':'Hi Mushu! I’d like a quote for an event:\n') + lines.map(l=>'• '+l.label).join('\n') + '\n' + (es?'Total estimado: ':'Estimated total: ') + fmt(total) + '\n' + (es?'Fecha: \nLugar: \nPersonas: \nTipo de evento: ':'Date: \nPlace: \nGuests: \nEvent type: ');
+        return { evSimRows:rows, evSimLines:lines, evSimCartTxt: drinks>0?fmt(CART):'$0', evSimTotalTxt:fmt(total), evSimCountTxt: drinks+' '+t.evSimDrinks, evSimWa:'https://wa.me/573155106556?text='+encodeURIComponent(msg) };
+      })(),
+      evMarquee:(()=>{ const m = es ? ['Moda','Pádel','Clases fit','Conciertos','Buro','Minfull Fest','Bodas','Cumpleaños'] : ['Fashion','Padel','Fitness classes','Concerts','Buro','Minfull Fest','Weddings','Birthdays']; return [...m,...m]; })(),
+      evCats:(es?[
+        ['Moda','Tiendas de ropa y lanzamientos','Hemos acompañado aperturas, días especiales en tienda y lanzamientos de colecciones. Mientras tus clientes se miden la ropa, se toman su bubble tea.','Fotos eventos de moda'],
+        ['Deportes','Pádel y clases fit','Torneos de pádel y clases fit con nuestra barra al lado. Después de sudar, nada como una bebida bien fría.','Fotos pádel / clase fit'],
+        ['Música','Conciertos','Donde hay buena música, hay ganas de algo rico. Llevamos Mushu para que el público se hidrate con estilo.','Fotos conciertos'],
+        ['Ferias','Buro y Minfull Fest','Montamos nuestra propia sucursal en ferias de Cali, con ediciones especiales que solo se consiguen ahí.','Fotos Buro / Minfull'],
+        ['Bodas','Su día, a su gusto','Una barra de bubble tea que sorprende a los invitados. Podemos armar bebidas con los colores o sabores de la pareja.','Fotos bodas'],
+        ['Cumpleaños','Celebraciones','Para que el cumpleañero y sus invitados prueben algo distinto. Niños, jóvenes y grandes: todos repiten.','Fotos cumpleaños']
+      ]:[
+        ['Fashion','Clothing stores and launches','We’ve joined store openings, in-store days and collection launches. While your guests try on clothes, they sip bubble tea.','Fashion event photos'],
+        ['Sports','Padel and fitness classes','Padel tournaments and fitness classes with our bar right there. After a workout, nothing beats an ice-cold drink.','Padel / fitness photos'],
+        ['Music','Concerts','Where there’s good music, there’s a craving. We bring Mushu so the crowd stays refreshed in style.','Concert photos'],
+        ['Fairs','Buro and Minfull Fest','We set up our own pop-up at Cali fairs, with special editions you can only get there.','Buro / Minfull photos'],
+        ['Weddings','Their day, their way','A bubble tea bar that surprises the guests. We can create drinks in the couple’s colors or flavors.','Wedding photos'],
+        ['Birthdays','Celebrations','So the birthday person and their guests try something different. Kids, teens and grown-ups all come back for more.','Birthday photos']
+      ]).map((x,i)=>({ tag:x[0], title:x[1], text:x[2], ph:x[3], slot:'ev-'+['moda','deportes','conciertos','ferias','bodas','cumple'][i], img:['moda','','conciertos','ferias','bodas','cumple'][i] ? 'assets/eventos/'+['moda','','conciertos','ferias','bodas','cumple'][i]+'.jpg' : '', delay:(i%3)*90, bg:[C.taro,C.mango,C.pink,C.milk,'#A7A4E0',C.mango][i] })),
+      evSteps:(es?[
+        ['Cuéntanos tu plan','Fecha, lugar, cuántas personas van y qué tipo de evento es.'],['Armamos la propuesta','Te recomendamos bebidas, toppings y montaje según tu evento.'],['Llegamos y servimos','Nuestro equipo prepara todo al momento. Tú solo disfruta.']
+      ]:[
+        ['Tell us your plan','Date, place, how many guests and what kind of event it is.'],['We build the proposal','We suggest drinks, toppings and setup for your event.'],['We show up and serve','Our team makes everything on the spot. You just enjoy.']
+      ]).map((x,i)=>({ n:'0'+(i+1), title:x[0], text:x[1], delay:i*90, color:['#ECFA95','#D7A9E3','#86C8BC'][i] })),
+      lySteps:(L==='es'?[
+        ['Regístrate','Entra al link y guarda la tarjeta en tu celular. Listo.'],['Suma un sello por visita','Cada vez que vienes por tu bebida, muestra tu tarjeta al pagar y te ponemos tu sello.'],['Completa 10','Al décimo sello, la siguiente bebida te la regalamos nosotros.']
+      ]:[
+        ['Sign up','Use the link and save the card on your phone. Done.'],['One stamp per visit','Every time you come for a drink, show your card when you pay and we’ll stamp it.'],['Fill all 10','On your tenth stamp, your next drink is on us.']
+      ]).map((x,i)=>({ n:i+1, title:x[0], text:x[1], delay:i*90, bg:[C.taro,C.mango,C.pink][i] })),
+      lyPerks:(L==='es'?[
+        ['Bebida gratis','Cada vez que completas tus 10 sellos.'],['Tu cumpleaños, más grande','Ese día te escribimos y durante una semana tu bebida se agranda gratis. Tú solo ven a celebrar.'],['Sorpresas en tu celular','Promos, lanzamientos y planes antes que nadie, directo en tu tarjeta.'],['Pronto: merch','Productos exclusivos Mushu para quienes nos visitan seguido.']
+      ]:[
+        ['Free drink','Every time you fill your 10 stamps.'],['Bigger birthday','We’ll message you on your day and for a week your drink gets a free size upgrade. Just come celebrate.'],['Surprises on your phone','Promos, launches and plans before anyone else, right on your card.'],['Coming soon: merch','Exclusive Mushu goodies for our regulars.']
+      ]).map((x,i)=>({ title:x[0], text:x[1], delay:i*90, bg:['#ECFA95','#D7A9E3','#86C8BC','#A7A4E0'][i] })),
+      t, goHome:e=>{e&&e.preventDefault();this.go('home');}, goMenu:()=>this.go('menu'), goStores:()=>this.go('stores'), goFranchise:()=>this.go('franchise'),
+      isHome:P==='home', isMenu:P==='menu', isAbout:P==='about', isStores:P==='stores', isFranchise:P==='franchise', isContact:P==='contact',
+      toggleLang:()=>this.setState({ lang: L==='es'?'en':'es' }),
+      toggleMenu:()=>this.setState({ menuOpen:!s.menuOpen, orderOpen:false }),
+      openOrder:e=>{e&&e.preventDefault&&e.preventDefault();this.setState({ orderOpen:true, menuOpen:false });}, closeOrder:()=>this.setState({ orderOpen:false }),
+      hdInk: s.menuOpen ? '#FFFDED' : '#141414', hdPaper: s.menuOpen ? '#141414' : '#FFFDED',
+      logoSrc: s.menuOpen ? 'assets/brand/logo-w.png' : 'assets/brand/logo-k.png', logoH: s.scrolled ? 42 : 56,
+      headPad: s.scrolled ? '10px clamp(16px,4vw,48px)' : '22px clamp(16px,4vw,48px)',
+      headBg: s.scrolled && !s.menuOpen ? 'rgba(255,253,237,.85)' : 'transparent',
+      burger1: s.menuOpen ? 'translateY(3.5px) rotate(45deg)' : 'none', burger2: s.menuOpen ? 'translateY(-3.5px) rotate(-45deg)' : 'none',
+      menuTf: s.menuOpen ? 'translateY(0)' : 'translateY(-101%)', menuOp: s.menuOpen?1:0, menuItemTf: s.menuOpen?'translateY(0)':'translateY(60px)',
+      orderOp: s.orderOpen?1:0, orderPe: s.orderOpen?'auto':'none', orderY: s.orderOpen?'0':'110%',
+      apps:[ { name:'Rappi · La Casita', note:L==='es'?'Domicilio desde Miraflores':'Delivery from Miraflores', href:'https://www.rappi.com.co/restaurantes/900401333-mushu-bubble-tea-and-coffee', bg:'#86C8BC' }, { name:'Rappi · Lago Verde', note:L==='es'?'Domicilio desde Pance':'Delivery from Pance', href:'https://www.rappi.com.co/restaurantes/900465046-mushu-bubble-tea-and-coffee', bg:'#86C8BC' }, { name:'DiDi Food', note:L==='es'?'Domicilio':'Delivery', href:'https://oia.didiglobal.com/dlp/8QXj9N', bg:'#ECFA95' }, { name:'WhatsApp', note:L==='es'?'Escríbenos':'Message us', href:'https://wa.me/573155106556', bg:'#D7A9E3' } ],
+      navItems, fade:s.fade, fadeY: s.fade?0:24,
+      marquee:[...mq,...mq],
+      steps:(L==='es'?[
+        ['Elige tu base','Milk tea, té frutal, soda o una signature de la casa.'],['Escoge tamaño','S de 16 oz o M de 22 oz. Sin vergüenza.'],['Pon tu topping','Tapioca, poppings y jellies. Escoge el que más te guste o agrégale todos los que quieras.'],['Ajusta el dulce','Muchas no llevan azúcar y tenemos otros endulzantes. Tú decides cuánto.']
+      ]:[
+        ['Pick your base','Milk tea, fruit tea, soda or a house signature.'],['Choose a size','S at 16 oz or M at 22 oz. No judgment.'],['Add a topping','Tapioca, poppings and jellies. Pick your favorite or add as many as you want.'],['Set the sweetness','Many have no sugar and we have other sweeteners. You decide how much.']
+      ]).map((x,i)=>({ n:i+1, title:x[0], text:x[1], delay:i*90, bg:[C.taro,C.mango,C.pink,C.milk][i] })),
+      signature:sig,
+      igPosts:[1,2,3,4,5,6].map(i=>({ slot:'ig-'+i, img:'assets/instagram/ig-'+i+'.jpg', delay:(i%3)*80 })), igFeed:s.igFeed||[], igLive:!!(s.igFeed&&s.igFeed.length), igLocal:!(s.igFeed&&s.igFeed.length),
+      cats:Object.keys(MENU).map(k=>({ label:CAT_LABEL[k][L==='es'?0:1], bg:k===s.cat?'#141414':'transparent', fg:k===s.cat?'#FFFDED':'#141414', pick:()=>this.pickCat(k) })),
+      catDesc:cm[L], items, listOp:s.listOp, listY:s.listOp?0:16,
+      timeline:(L==='es'?[
+        ['2019','La curiosidad','Descubrimos el bubble tea por redes y amigos en el exterior.'],['México','El sorbo que lo cambió','Probamos un bubble tea con calidad y concepto de verdad.'],['2023','La primera Mushu','Un local pequeñito en Cali, unas mesas y muchas ganas.'],['2025','La segunda','Abrimos nuestra segunda tienda propia.']
+      ]:[
+        ['2019','The curiosity','We found bubble tea online and through friends abroad.'],['Mexico','The sip that changed it','We tried bubble tea with real quality and concept.'],['2023','The first Mushu','A tiny spot in Cali, a few tables and lots of drive.'],['2025','The second','We opened our second company-owned store.']
+      ]).map((x,i)=>({ year:x[0], title:x[1], text:x[2], delay:i*90 })),
+      values:(L==='es'?[
+        ['Calidad','Ingredientes y sabor sin atajos.'],['Procesos','Cada paso se respeta, siempre.'],['Recetas','Si no cumple el estándar, no sale.']
+      ]:[
+        ['Quality','Ingredients and flavor, no shortcuts.'],['Process','Every step respected, always.'],['Recipes','If it’s not standard, it doesn’t leave.']
+      ]).map((x,i)=>({ title:x[0], text:x[1], delay:i*90, bg:['#A7A4E0','#ECFA95','#86C8BC','#FFFDED'][i] })),
+      stores, cur: stories[s.store], curOp: s.storeOp===0?0:1,
+      frFacts:(L==='es'?[['~15 m²','Locales pequeños y eficientes'],['Alto flujo','Peatonal, al aire libre, público curioso'],['3 ciudades','Cali, Bogotá y Medellín']]:[['~15 m²','Small, efficient stores'],['High traffic','Walkable, open-air, curious crowds'],['3 cities','Cali, Bogotá and Medellín']]).map((x,i)=>({ big:x[0], text:x[1], delay:i*90, bg:[C.taro,C.mango,C.pink][i] })),
+      frSteps:(L==='es'?[
+        ['Pasión por el detalle','Que te importe el sabor, la textura y la presentación tanto como a nosotros.'],['Respeto por el método','Recetas estandarizadas y procesos que se cumplen sin interpretación.'],['Cultura de equipo','Un equipo que explica, guía y recomienda al cliente.'],['Visión a largo plazo','Calidad sobre volumen. Ejecución sobre ventas.']
+      ]:[
+        ['Love for detail','You care about flavor, texture and presentation as much as we do.'],['Respect for method','Standard recipes and processes followed without interpretation.'],['Team culture','A team that explains, guides and recommends.'],['Long-term view','Quality over volume. Execution over sales.']
+      ]).map((x,i)=>({ n:'0'+(i+1), title:x[0], text:x[1], delay:i*80 })),
+      frFields:(L==='es'?[['Nombre','Tu nombre'],['Ciudad','¿Dónde la abrirías?'],['Correo','tu@correo.com'],['Teléfono','+57']]:[['Name','Your name'],['City','Where would you open it?'],['Email','you@email.com'],['Phone','+57']]).map(x=>({ label:x[0], ph:x[1] })),
+      frSent:s.frSent, frForm:!s.frSent, sendFr:()=>this.sendForm('[data-fr]','Solicitud de franquicia - web Mushu','frSent'),
+      ctSent:s.ctSent, ctForm:!s.ctSent, sendCt:()=>this.sendForm('[data-ct]','Mensaje de contacto - web Mushu','ctSent'),
+      channels:[ ['Instagram','@mushu.coo','https://www.instagram.com/mushu.coo'], ['TikTok','@mushu.coo','https://www.tiktok.com/@mushu.coo'], ['WhatsApp','+57 315 510 6556','https://wa.me/573155106556'], [L==='es'?'Correo':'Email','mushububbletea@outlook.com','mailto:mushububbletea@outlook.com'] ].map((x,i)=>({ label:x[0], value:x[1], href:x[2], delay:i*70 }))
+    };
+  }
+}
+</script>
+</body>
+</html>
