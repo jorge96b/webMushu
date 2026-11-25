@@ -135,9 +135,9 @@ input,textarea,select,button{font-family:inherit}
     </div>
     <div style="display:flex;gap:18px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;padding:10px clamp(20px,5vw,72px) 30px;scrollbar-width:none">
       <sc-for list="{{ signature }}" as="p" hint-placeholder-count="6">
-        <div data-reveal="{{ p.delay }}" style="flex:0 0 min(78vw,320px);scroll-snap-align:start;background:{{ p.bg }};color:#111111;border-radius:32px;padding:22px;display:flex;flex-direction:column;gap:16px;transition:transform .35s cubic-bezier(.2,.7,.2,1)" style-hover="transform:translateY(-10px)">
+        <div data-reveal="{{ p.delay }}" style="flex:0 0 min(78vw,320px);width:min(78vw,320px);min-width:0;scroll-snap-align:start;background:{{ p.bg }};color:#111111;border-radius:32px;padding:22px;display:flex;flex-direction:column;gap:16px;transition:transform .35s cubic-bezier(.2,.7,.2,1)" style-hover="transform:translateY(-10px)">
           <div style="position:relative;width:100%;aspect-ratio:1;animation:mBob {{ p.dur }}s ease-in-out infinite">
-            <image-slot loading="lazy" id="{{ p.slot }}" src="{{ p.img }}" shape="rounded" radius="24" fit="contain" placeholder="{{ p.name }}"></image-slot>
+            <image-slot loading="lazy" id="{{ p.slot }}" src="{{ p.img }}" shape="rounded" radius="24" fit="contain" placeholder="{{ p.name }}" style="position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto"></image-slot>
           </div>
           <div>
             <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;letter-spacing:-0.03em;margin:0 0 6px">{{ p.name }}</h3>
