@@ -55,7 +55,7 @@ input,textarea,select,button{font-family:inherit}
   <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:48px;margin-bottom:auto;font-size:15px;color:#D9C7B4">
     <a href="https://www.instagram.com/mushu.coo" style="color:inherit" style-hover="color:#ECFA95" target="_blank">Instagram</a><span>·</span><a href="https://www.tiktok.com/@mushu.coo" style="color:inherit" style-hover="color:#ECFA95" target="_blank">TikTok</a><span>·</span><a href="https://www.facebook.com/mushu.coo/" style="color:inherit" style-hover="color:#ECFA95" target="_blank">Facebook</a><span>·</span><span>{ t.madeIn }</span>
   </div>
-  <img src="assets/brand/mascot-w.png" alt="" style="position:absolute;right:clamp(20px,6vw,96px);bottom:40px;width:clamp(90px,14vw,180px);animation:mBob 3s ease-in-out infinite;pointer-events:none">
+  <img loading="lazy" src="assets/brand/mascot-w.webp" alt="" style="position:absolute;right:clamp(20px,6vw,96px);bottom:40px;width:clamp(90px,14vw,180px);animation:mBob 3s ease-in-out infinite;pointer-events:none">
 </div>
 
 <div onClick="{{ closeOrder }}" style="position:fixed;inset:0;z-index:60;background:rgba(10,10,10,.55);opacity:{{ orderOp }};pointer-events:{{ orderPe }};transition:opacity .3s"></div>
@@ -92,13 +92,13 @@ input,textarea,select,button{font-family:inherit}
       <div style="position:absolute;width:min(78vw,540px);aspect-ratio:1;border-radius:50%;background:#A7A4E0"></div>
       <div style="position:absolute;width:min(92vw,640px);aspect-ratio:1;border-radius:50%;border:1.5px dashed #141414;opacity:.35;animation:mSpin 40s linear infinite"></div>
       <div style="position:relative;width:min(60vw,380px);aspect-ratio:3/4;animation:mFloat 6s ease-in-out infinite">
-        <image-slot id="hero-cup" src="assets/drinks/d7.png" shape="rounded" radius="40" fit="contain" placeholder="Foto bebida estrella (PNG sin fondo)"></image-slot>
+        <image-slot id="hero-cup" src="assets/drinks/d7.webp" shape="rounded" radius="40" fit="contain" placeholder="Foto bebida estrella (PNG sin fondo)"></image-slot>
       </div>
       <div style="position:absolute;top:8%;right:4%;width:clamp(90px,14vw,140px);aspect-ratio:1;animation:mBob 4s ease-in-out infinite">
-        <image-slot id="hero-char" shape="rect" fit="contain" src="assets/brand/mascot-k.png" placeholder="Personaje Mushu"></image-slot>
+        <image-slot id="hero-char" shape="rect" fit="contain" src="assets/brand/mascot-k.webp" placeholder="Personaje Mushu"></image-slot>
       </div>
       <div style="position:absolute;bottom:6%;left:2%;padding:14px 18px;border-radius:20px;background:#ECFA95;color:#111111;font-weight:700;font-size:15px;transform:rotate(-6deg);animation:mBob 5s ease-in-out infinite">{{ t.sticker }}</div>
-      <div style="position:absolute;bottom:2%;right:4%;width:clamp(84px,12vw,124px);aspect-ratio:1;animation:mSpin 22s linear infinite;pointer-events:none"><img src="assets/brand/stamp-k.png" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+      <div style="position:absolute;bottom:2%;right:4%;width:clamp(84px,12vw,124px);aspect-ratio:1;animation:mSpin 22s linear infinite;pointer-events:none"><img src="assets/brand/stamp-k.webp" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></div>
     </div>
   </section>
 
@@ -137,7 +137,7 @@ input,textarea,select,button{font-family:inherit}
       <sc-for list="{{ signature }}" as="p" hint-placeholder-count="6">
         <div data-reveal="{{ p.delay }}" style="flex:0 0 min(78vw,320px);scroll-snap-align:start;background:{{ p.bg }};color:#111111;border-radius:32px;padding:22px;display:flex;flex-direction:column;gap:16px;transition:transform .35s cubic-bezier(.2,.7,.2,1)" style-hover="transform:translateY(-10px)">
           <div style="position:relative;width:100%;aspect-ratio:1;animation:mBob {{ p.dur }}s ease-in-out infinite">
-            <image-slot id="{{ p.slot }}" src="{{ p.img }}" shape="rounded" radius="24" fit="contain" placeholder="{{ p.name }}"></image-slot>
+            <image-slot loading="lazy" id="{{ p.slot }}" src="{{ p.img }}" shape="rounded" radius="24" fit="contain" placeholder="{{ p.name }}"></image-slot>
           </div>
           <div>
             <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;letter-spacing:-0.03em;margin:0 0 6px">{{ p.name }}</h3>
@@ -175,10 +175,10 @@ input,textarea,select,button{font-family:inherit}
       <div style="position:relative;width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center">
         <div style="position:absolute;width:82%;aspect-ratio:1;border-radius:50%;background:#FFFDED"></div>
         <sc-for list="{{ ddDays }}" as="d" hint-placeholder-count="1">
-          <img src="{{ d.img }}" alt="{{ d.drink }}" style="position:absolute;height:80%;width:auto;max-width:90%;object-fit:contain;opacity:{{ d.op }};transform:{{ d.tf }};transition:opacity .45s ease,transform .6s cubic-bezier(.2,.8,.2,1);pointer-events:none">
+          <img loading="lazy" src="{{ d.img }}" alt="{{ d.drink }}" style="position:absolute;height:80%;width:auto;max-width:90%;object-fit:contain;opacity:{{ d.op }};transform:{{ d.tf }};transition:opacity .45s ease,transform .6s cubic-bezier(.2,.8,.2,1);pointer-events:none">
         </sc-for>
         <div style="position:absolute;left:0;bottom:6%;padding:12px 16px;border-radius:18px;background:#111111;color:#ECFA95;font-weight:700;font-size:15px;transform:rotate(-6deg);animation:mBob 4.5s ease-in-out infinite">{{ ddSticker }}</div>
-        <img src="assets/brand/mascot-k.png" alt="" style="position:absolute;right:0;top:2%;width:clamp(70px,10vw,110px);animation:mBob 3.6s ease-in-out infinite;pointer-events:none">
+        <img loading="lazy" src="assets/brand/mascot-k.webp" alt="" style="position:absolute;right:0;top:2%;width:clamp(70px,10vw,110px);animation:mBob 3.6s ease-in-out infinite;pointer-events:none">
       </div>
     </div>
   </section>
@@ -222,7 +222,7 @@ input,textarea,select,button{font-family:inherit}
         <sc-if value="{{ igLocal }}" hint-placeholder-val="{{ true }}">
           <sc-for list="{{ igPosts }}" as="g" hint-placeholder-count="6">
             <div data-reveal="{{ g.delay }}" style="position:relative;aspect-ratio:1;border-radius:24px;overflow:hidden;transition:transform .3s" style-hover="transform:scale(.97) rotate(1deg)">
-              <image-slot id="{{ g.slot }}" src="{{ g.img }}" fit="cover" shape="rect" placeholder="Post Instagram"></image-slot>
+              <image-slot loading="lazy" id="{{ g.slot }}" src="{{ g.img }}" fit="cover" shape="rect" placeholder="Post Instagram"></image-slot>
             </div>
           </sc-for>
         </sc-if>
@@ -246,7 +246,7 @@ input,textarea,select,button{font-family:inherit}
         <sc-for list="{{ items }}" as="p" hint-placeholder-count="6">
           <div style="background:#FFFFFF;border-radius:28px;padding:16px;display:flex;flex-direction:column;gap:14px;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s" style-hover="transform:translateY(-8px);box-shadow:0 24px 40px -20px rgba(20,20,20,.35)">
             <div style="position:relative;width:100%;aspect-ratio:1;border-radius:20px;background:{{ p.bg }}">
-              <image-slot id="{{ p.slot }}" src="{{ p.img }}" shape="rounded" radius="20" fit="contain" placeholder="{{ p.name }}"></image-slot>
+              <image-slot loading="lazy" id="{{ p.slot }}" src="{{ p.img }}" shape="rounded" radius="20" fit="contain" placeholder="{{ p.name }}"></image-slot>
             </div>
             <div style="padding:0 6px 6px">
               <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px">
@@ -273,7 +273,7 @@ input,textarea,select,button{font-family:inherit}
       <h1 data-reveal="60" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(56px,10vw,150px);line-height:.88;letter-spacing:-0.05em;margin:0 0 48px;max-width:1100px;text-wrap:balance">{{ t.aboutTitle }}</h1>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:40px;align-items:start">
         <div data-reveal="0" style="position:relative;width:100%;aspect-ratio:4/5">
-          <img src="assets/brand/oval-k.png" alt="" style="position:absolute;right:-14px;top:-28px;width:clamp(80px,10vw,120px);transform:rotate(10deg);z-index:2;pointer-events:none"><image-slot id="about-founders" src="assets/about/fundadores.jpg" fit="cover" shape="rounded" radius="36" placeholder="Foto Jorge y Angélica en la tienda"></image-slot>
+          <img loading="lazy" src="assets/brand/oval-k.webp" alt="" style="position:absolute;right:-14px;top:-28px;width:clamp(80px,10vw,120px);transform:rotate(10deg);z-index:2;pointer-events:none"><image-slot loading="lazy" id="about-founders" src="assets/about/fundadores.webp" fit="cover" shape="rounded" radius="36" placeholder="Foto Jorge y Angélica en la tienda"></image-slot>
         </div>
         <div style="display:flex;flex-direction:column;gap:22px;font-size:19px;line-height:1.6">
           <p data-reveal="0" style="margin:0;text-wrap:pretty">{{ t.about1 }}</p>
@@ -337,7 +337,7 @@ input,textarea,select,button{font-family:inherit}
         </div>
         <div data-reveal="100" style="border-radius:32px;overflow:hidden;background:{{ cur.bg }};color:#111111;display:flex;flex-direction:column;transition:background .4s">
           <div style="position:relative;aspect-ratio:4/3;overflow:hidden">
-            <img src="{{ cur.img }}" alt="{{ cur.alias }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ curOp }};transition:opacity .3s">
+            <img loading="lazy" src="{{ cur.img }}" alt="{{ cur.alias }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:{{ curOp }};transition:opacity .3s">
           </div>
           <div style="padding:clamp(22px,3.5vw,40px);opacity:{{ curOp }};transition:opacity .3s">
             <p style="margin:0 0 8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px">{{ cur.year }} · {{ cur.place }}</p>
@@ -420,13 +420,13 @@ input,textarea,select,button{font-family:inherit}
       <div data-reveal="100" style="position:relative">
         <div style="background:#141414;color:#FFFDED;border-radius:36px;padding:clamp(24px,4vw,40px);transform:rotate(-2deg);box-shadow:0 30px 60px -30px rgba(20,20,20,.5)">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:28px">
-            <img src="assets/brand/logo-w.png" alt="Múshu" style="height:40px;width:auto;display:block">
+            <img loading="lazy" src="assets/brand/logo-w.webp" alt="Múshu" style="height:40px;width:auto;display:block">
             <span style="padding:6px 14px;border-radius:999px;background:#A7A4E0;color:#111111;font-size:13px;font-weight:700">{{ t.lyKicker }}</span>
           </div>
           <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(8px,1.5vw,14px);margin-bottom:24px">
             <sc-for list="{{ stampDots }}" as="d" hint-placeholder-count="10">
               <div style="position:relative;aspect-ratio:1;border-radius:50%;background:{{ d.bg }};border:2px dashed {{ d.bd }};display:flex;align-items:center;justify-content:center;transition:background .3s,transform .3s;transform:scale({{ d.sc }})">
-                <img src="assets/brand/mascot-k.png" alt="" style="width:62%;height:62%;object-fit:contain;opacity:{{ d.op }};transition:opacity .3s">
+                <img loading="lazy" src="assets/brand/mascot-k.webp" alt="" style="width:62%;height:62%;object-fit:contain;opacity:{{ d.op }};transition:opacity .3s">
                 <span style="position:absolute;font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;color:#D9C7B4;opacity:{{ d.numOp }}">{{ d.n }}</span>
               </div>
             </sc-for>
@@ -436,7 +436,7 @@ input,textarea,select,button{font-family:inherit}
             <button onClick="{{ addStamp }}" style="height:48px;padding:0 22px;border-radius:999px;border:none;background:#ECFA95;color:#111111;font-weight:700;font-size:15px;cursor:pointer;transition:transform .2s" style-hover="transform:scale(1.05)">{{ stampBtn }}</button>
           </div>
         </div>
-        <img src="assets/brand/stamp-k.png" alt="" style="position:absolute;right:-18px;top:-36px;width:clamp(80px,10vw,120px);animation:mSpin 22s linear infinite;pointer-events:none">
+        <img loading="lazy" src="assets/brand/stamp-k.webp" alt="" style="position:absolute;right:-18px;top:-36px;width:clamp(80px,10vw,120px);animation:mSpin 22s linear infinite;pointer-events:none">
       </div>
     </div>
   </section>
@@ -517,7 +517,7 @@ input,textarea,select,button{font-family:inherit}
         <sc-for list="{{ evCats }}" as="e" hint-placeholder-count="6">
           <div data-reveal="{{ e.delay }}" style="background:{{ e.bg }};color:#111111;border-radius:32px;padding:16px;display:flex;flex-direction:column;gap:16px;transition:transform .35s cubic-bezier(.2,.7,.2,1)" style-hover="transform:translateY(-8px) rotate(-.6deg)">
             <div style="position:relative;width:100%;aspect-ratio:4/3;border-radius:22px;overflow:hidden;background:#FFFDED">
-              <image-slot id="{{ e.slot }}" src="{{ e.img }}" fit="cover" shape="rounded" radius="22" placeholder="{{ e.ph }}"></image-slot>
+              <image-slot loading="lazy" id="{{ e.slot }}" src="{{ e.img }}" fit="cover" shape="rounded" radius="22" placeholder="{{ e.ph }}"></image-slot>
             </div>
             <div style="padding:4px 8px 10px">
               <span style="display:inline-block;padding:5px 12px;border-radius:999px;background:#111111;color:#FFFDED;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px">{{ e.tag }}</span>
@@ -599,7 +599,7 @@ input,textarea,select,button{font-family:inherit}
         <p style="margin:0;font-size:18px;line-height:1.5">{{ t.evCtaText }}</p>
       </div>
       <button onClick="{{ goContact }}" style="position:relative;z-index:1;height:56px;padding:0 30px;border-radius:999px;border:none;background:#111111;color:#A7A4E0;font-weight:700;font-size:17px;cursor:pointer;transition:transform .2s" style-hover="transform:translateY(-3px)">{{ t.evQuote }} →</button>
-      <img src="assets/brand/mascot-k.png" alt="" style="position:absolute;right:clamp(12px,3vw,40px);bottom:-18px;width:clamp(70px,9vw,110px);opacity:.9;animation:mBob 3.6s ease-in-out infinite;pointer-events:none">
+      <img loading="lazy" src="assets/brand/mascot-k.webp" alt="" style="position:absolute;right:clamp(12px,3vw,40px);bottom:-18px;width:clamp(70px,9vw,110px);opacity:.9;animation:mBob 3.6s ease-in-out infinite;pointer-events:none">
     </div>
   </section>
 </sc-if>
@@ -780,7 +780,7 @@ const MENU = {
     ['Mochis','Helado envuelto en masa de arroz: taro, lulo, piña colada y yogurt de frutos rojos.','Ice cream wrapped in rice dough: taro, lulo, piña colada and berry yogurt.']]}};
 const CAT_LABEL = { signature:['Signature','Signature'], milk:['Milk Tea','Milk Tea'], fruit:['Frutales','Fruit Tea'], soda:['Sodas','Sodas'], sides:['Para acompañar','Sides'] };
 const IMG = {'Fresa Foam':'d7','Mango Foam':'d18','Taroreo':'d8','Limonada de Coco':'d6','Piña Colada':'d2','Brown Sugar':'d10','Taro':'d17','Matcha':'d11','Black Milk Tea':'d16','Chocolate':'d13','Coco':'d9','Coffee Milk Tea':'d12','Passion Fruit':'d4','Mango Tea':'d3','Tamarindo':'d1','Frutos Rojos':'d5','Waffle de Pandebono':'d19','Croffle Almendras':'d20','Croffle Oreo':'d21'};
-const imgOf = n => IMG[n] ? 'assets/drinks/'+IMG[n]+'.png' : '';
+const imgOf = n => IMG[n] ? 'assets/drinks/'+IMG[n]+'.webp' : '';
 const slug = s => s.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'-');
 
 const DD = [['Lun','Mon','Tamarindo','Tamarind','d1','Para quitarte el calor','To beat the heat'],['Mar','Tue','Matcha','Matcha','d11','Pura energía','Pure energy'],['Mié','Wed','Coffee','Coffee','d12','Para la tarde','For the afternoon'],['Jue','Thu','Chai','Chai','d16','Para darte un gustico','To treat yourself'],['Vie','Fri','Mango','Mango','d3','Algo dulce','Something sweet']];
@@ -870,10 +870,10 @@ class Component extends DCLogic {
     ]:[
       ['2023','Miraflores','La Casita','It all started here in 2023. We turned a studio apartment into a shop, put a few tables out on the street, and little by little people started coming.','That’s how it became La Casita: the place where people meet to talk, enjoy a good drink with no rush and feel the Cali afternoon breeze. When we opened Lago Verde we were afraid people would stop coming. They didn’t, and we’re grateful every single day.','La Casita photo (front or street tables)'],
       ['2025','Pance','Lago Verde','After many fairs in the south of the city, in 2025 we took the leap and opened in Pance. We always wanted a place that showed who we are.','We found it in Lago Verde: a shopping park surrounded by nature, where families, friends, athletes and even their pets come by. That’s why we also have dog popsicles here.','Mushu Lago Verde photo']
-    ]).map((x,i)=>({ year:x[0], place:x[1], alias:x[2], p1:x[3], p2:x[4], ph:x[5], slot:'story-'+['casita','lagoverde'][i], img:'assets/stores/'+['casita','lagoverde'][i]+'.jpg', bg:['#ECFA95','#86C8BC'][i], delay:i*100 }));
+    ]).map((x,i)=>({ year:x[0], place:x[1], alias:x[2], p1:x[3], p2:x[4], ph:x[5], slot:'story-'+['casita','lagoverde'][i], img:'assets/stores/'+['casita','lagoverde'][i]+'.webp', bg:['#ECFA95','#86C8BC'][i], delay:i*100 }));
     const mq = L==='es' ? ['Milk tea','Tapioca','Taro','Cheese foam','Matcha','Lychee'] : ['Milk tea','Tapioca','Taro','Cheese foam','Matcha','Lychee'];
     const di = s.dd, es = L==='es';
-    const ddDays = DD.map((d,i) => ({ day: es?d[0]:d[1], drink: es?d[2]:d[3], img:'assets/drinks/'+d[4]+'.png', pick:()=>this.pickDD(i),
+    const ddDays = DD.map((d,i) => ({ day: es?d[0]:d[1], drink: es?d[2]:d[3], img:'assets/drinks/'+d[4]+'.webp', pick:()=>this.pickDD(i),
       bg: i===di?'#111111':'transparent', fg: i===di?'#ECFA95':'#111111', todayOp: i===TODAY?1:0,
       op: i===di?1:0, tf: i===di?'translateY(0) rotate(0deg) scale(1)':(i<di?'translateX(-30%) rotate(-12deg) scale(.85)':'translateX(30%) rotate(12deg) scale(.85)') }));
     return {
@@ -915,7 +915,7 @@ class Component extends DCLogic {
         ['Fairs','Buro and Minfull Fest','We set up our own pop-up at Cali fairs, with special editions you can only get there.','Buro / Minfull photos'],
         ['Weddings','Their day, their way','A bubble tea bar that surprises the guests. We can create drinks in the couple’s colors or flavors.','Wedding photos'],
         ['Birthdays','Celebrations','So the birthday person and their guests try something different. Kids, teens and grown-ups all come back for more.','Birthday photos']
-      ]).map((x,i)=>({ tag:x[0], title:x[1], text:x[2], ph:x[3], slot:'ev-'+['moda','deportes','conciertos','ferias','bodas','cumple'][i], img:['moda','','conciertos','ferias','bodas','cumple'][i] ? 'assets/eventos/'+['moda','','conciertos','ferias','bodas','cumple'][i]+'.jpg' : '', delay:(i%3)*90, bg:[C.taro,C.mango,C.pink,C.milk,'#A7A4E0',C.mango][i] })),
+      ]).map((x,i)=>({ tag:x[0], title:x[1], text:x[2], ph:x[3], slot:'ev-'+['moda','deportes','conciertos','ferias','bodas','cumple'][i], img:['moda','','conciertos','ferias','bodas','cumple'][i] ? 'assets/eventos/'+['moda','','conciertos','ferias','bodas','cumple'][i]+'.webp' : '', delay:(i%3)*90, bg:[C.taro,C.mango,C.pink,C.milk,'#A7A4E0',C.mango][i] })),
       evSteps:(es?[
         ['Cuéntanos tu plan','Fecha, lugar, cuántas personas van y qué tipo de evento es.'],['Armamos la propuesta','Te recomendamos bebidas, toppings y montaje según tu evento.'],['Llegamos y servimos','Nuestro equipo prepara todo al momento. Tú solo disfruta.']
       ]:[
@@ -937,7 +937,7 @@ class Component extends DCLogic {
       toggleMenu:()=>this.setState({ menuOpen:!s.menuOpen, orderOpen:false }),
       openOrder:e=>{e&&e.preventDefault&&e.preventDefault();this.setState({ orderOpen:true, menuOpen:false });}, closeOrder:()=>this.setState({ orderOpen:false }),
       hdInk: s.menuOpen ? '#FFFDED' : '#141414', hdPaper: s.menuOpen ? '#141414' : '#FFFDED',
-      logoSrc: s.menuOpen ? 'assets/brand/logo-w.png' : 'assets/brand/logo-k.png', logoH: s.scrolled ? 42 : 56,
+      logoSrc: s.menuOpen ? 'assets/brand/logo-w.webp' : 'assets/brand/logo-k.webp', logoH: s.scrolled ? 42 : 56,
       headPad: s.scrolled ? '10px clamp(16px,4vw,48px)' : '22px clamp(16px,4vw,48px)',
       headBg: s.scrolled && !s.menuOpen ? 'rgba(255,253,237,.85)' : 'transparent',
       burger1: s.menuOpen ? 'translateY(3.5px) rotate(45deg)' : 'none', burger2: s.menuOpen ? 'translateY(-3.5px) rotate(-45deg)' : 'none',
@@ -952,7 +952,7 @@ class Component extends DCLogic {
         ['Pick your base','Milk tea, fruit tea, soda or a house signature.'],['Choose a size','S at 16 oz or M at 22 oz. No judgment.'],['Add a topping','Tapioca, poppings and jellies. Pick your favorite or add as many as you want.'],['Set the sweetness','Many have no sugar and we have other sweeteners. You decide how much.']
       ]).map((x,i)=>({ n:i+1, title:x[0], text:x[1], delay:i*90, bg:[C.taro,C.mango,C.pink,C.milk][i] })),
       signature:sig,
-      igPosts:[1,2,3,4,5,6].map(i=>({ slot:'ig-'+i, img:'assets/instagram/ig-'+i+'.jpg', delay:(i%3)*80 })), igFeed:s.igFeed||[], igLive:!!(s.igFeed&&s.igFeed.length), igLocal:!(s.igFeed&&s.igFeed.length),
+      igPosts:[1,2,3,4,5,6].map(i=>({ slot:'ig-'+i, img:'assets/instagram/ig-'+i+'.webp', delay:(i%3)*80 })), igFeed:s.igFeed||[], igLive:!!(s.igFeed&&s.igFeed.length), igLocal:!(s.igFeed&&s.igFeed.length),
       cats:Object.keys(MENU).map(k=>({ label:CAT_LABEL[k][L==='es'?0:1], bg:k===s.cat?'#141414':'transparent', fg:k===s.cat?'#FFFDED':'#141414', pick:()=>this.pickCat(k) })),
       catDesc:cm[L], items, listOp:s.listOp, listY:s.listOp?0:16,
       timeline:(L==='es'?[
