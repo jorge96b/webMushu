@@ -779,11 +779,11 @@ const MENU = {
     ['Croffle Oreo','Croissant hecho waffle, con chocolate y galleta Oreo.','A croissant turned waffle, with chocolate and Oreo crumbs.'],
     ['Mochis','Helado envuelto en masa de arroz: taro, lulo, piña colada y yogurt de frutos rojos.','Ice cream wrapped in rice dough: taro, lulo, piña colada and berry yogurt.']]}};
 const CAT_LABEL = { signature:['Signature','Signature'], milk:['Milk Tea','Milk Tea'], fruit:['Frutales','Fruit Tea'], soda:['Sodas','Sodas'], sides:['Para acompañar','Sides'] };
-const IMG = {'Fresa Foam':'d7','Mango Foam':'d18','Taroreo':'d8','Limonada de Coco':'d6','Piña Colada':'d2','Brown Sugar':'d10','Taro':'d17','Matcha':'d11','Black Milk Tea':'d16','Chocolate':'d13','Coco':'d9','Coffee Milk Tea':'d12','Passion Fruit':'d4','Mango Tea':'d3','Tamarindo':'d1','Frutos Rojos':'d5','Waffle de Pandebono':'d19','Croffle Almendras':'d20','Croffle Oreo':'d21'};
+const IMG = {'Fresa Foam':'d7','Mango Foam':'d30','Taroreo':'d8','Limonada de Coco':'d31','Piña Colada':'d32','Brown Sugar':'d10','Taro':'d17','Matcha':'d11','Black Milk Tea':'d16','Chocolate':'d13','Coco':'d9','Coffee Milk Tea':'d12','Chai':'d22','Passion Fruit':'d4','Lychee':'d24','Mango Tea':'d25','Flor de Jamaica':'d23','Soda Lychee':'d29','Frutos Amarillos':'d27','Soda Frutos Rojos':'d28','Mochis':'d26','Tamarindo':'d1','Frutos Rojos':'d5','Waffle de Pandebono':'d19','Croffle Almendras':'d20','Croffle Oreo':'d21'};
 const imgOf = n => IMG[n] ? 'assets/drinks/'+IMG[n]+'.webp' : '';
 const slug = s => s.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g,'-');
 
-const DD = [['Lun','Mon','Tamarindo','Tamarind','d1','Para quitarte el calor','To beat the heat'],['Mar','Tue','Matcha','Matcha','d11','Pura energía','Pure energy'],['Mié','Wed','Coffee','Coffee','d12','Para la tarde','For the afternoon'],['Jue','Thu','Chai','Chai','d16','Para darte un gustico','To treat yourself'],['Vie','Fri','Mango','Mango','d3','Algo dulce','Something sweet']];
+const DD = [['Lun','Mon','Tamarindo','Tamarind','d1','Para quitarte el calor','To beat the heat'],['Mar','Tue','Matcha','Matcha','d11','Pura energía','Pure energy'],['Mié','Wed','Coffee','Coffee','d12','Para la tarde','For the afternoon'],['Jue','Thu','Chai','Chai','d22','Para darte un gustico','To treat yourself'],['Vie','Fri','Mango','Mango','d25','Algo dulce','Something sweet']];
 const WD = new Date().getDay(); const TODAY = WD>=1 && WD<=5 ? WD-1 : -1;
 // Pega aquí la URL del feed JSON de Behold (https://feeds.behold.so/XXXX). Vacío = se muestran las fotos locales.
 const BEHOLD_FEED = 'https://feeds.behold.so/ftumVn8TMMndukxuxAzj';
