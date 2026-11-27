@@ -40,6 +40,7 @@ input,textarea,select,button{font-family:inherit}
   [data-m="sthead"]{flex-wrap:wrap}
   [data-m="sthead"] h3{white-space:nowrap}
   [data-m="frh1"]{font-size:clamp(40px,12vw,52px)!important}
+  [data-m="fact"]{min-height:0!important;gap:14px}
 }
 </style>
 </helmet>
@@ -372,7 +373,7 @@ input,textarea,select,button{font-family:inherit}
       <p data-reveal="120" style="font-size:20px;line-height:1.55;max-width:640px;color:#5A5550;margin:0 0 64px">{{ t.frSub }}</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px;margin-bottom:80px">
         <sc-for list="{{ frFacts }}" as="f" hint-placeholder-count="3">
-          <div data-reveal="{{ f.delay }}" style="background:{{ f.bg }};color:#111111;border-radius:28px;padding:28px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between">
+          <div data-m="fact" data-reveal="{{ f.delay }}" style="background:{{ f.bg }};color:#111111;border-radius:28px;padding:28px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between">
             <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(40px,5vw,64px);letter-spacing:-0.04em;line-height:1">{{ f.big }}</div>
             <p style="margin:0;font-size:16px;font-weight:600;line-height:1.4">{{ f.text }}</p>
           </div>
