@@ -287,8 +287,8 @@ input,textarea,select,button{font-family:inherit}
   <section style="padding:40px clamp(20px,5vw,72px) 80px">
     <div style="max-width:1280px;margin:0 auto">
       <h2 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(40px,6vw,84px);line-height:.95;letter-spacing:-0.04em;margin:0 0 40px">{{ t.timelineTitle }}</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px">
-        <sc-for list="{{ timeline }}" as="e" hint-placeholder-count="4">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:32px 18px">
+        <sc-for list="{{ timeline }}" as="e" hint-placeholder-count="6">
           <div data-reveal="{{ e.delay }}" style="border-top:3px solid #141414;padding-top:20px">
             <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:44px;letter-spacing:-0.04em;color:#5B55B8">{{ e.year }}</div>
             <h3 style="font-size:20px;margin:8px 0 6px">{{ e.title }}</h3>
@@ -369,7 +369,7 @@ input,textarea,select,button{font-family:inherit}
         <div>
           <h2 data-reveal="0" style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,5vw,64px);line-height:.95;letter-spacing:-0.04em;margin:0 0 32px">{{ t.frLook }}</h2>
           <div style="display:flex;flex-direction:column">
-            <sc-for list="{{ frSteps }}" as="s" hint-placeholder-count="4">
+            <sc-for list="{{ frSteps }}" as="s" hint-placeholder-count="5">
               <div data-reveal="{{ s.delay }}" style="display:flex;gap:20px;padding:22px 0;border-top:2px solid #141414">
                 <span style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#5B55B8">{{ s.n }}</span>
                 <div>
@@ -703,13 +703,13 @@ const T = {
     visitTitle:'Ven a probarla en persona.', seeStores:'Ver tiendas', franchiseCta:'Franquicias', followIg:'Síguenos en Instagram',
     menuTitle:'Menú', menuSub:'Todas en tamaño S (16 oz) o M (22 oz). Escoge tu topping y ajusta el dulzor.',
     menuNote:'¿No sabes cuál pedir? En tienda te damos hasta 3 recomendaciones según lo que te gusta.',
-    aboutKicker:'Nuestra historia', aboutTitle:'No nacimos en el mall.',
+    aboutKicker:'Nuestra historia', aboutTitle:'Somos un equipo.',
     about1:'Mushu nació de la curiosidad: bebidas que nunca habíamos visto en nuestra ciudad. Supimos del bubble tea por redes y por amigos que vivían afuera del país. Luego, en un viaje a México, lo probamos bien hecho: calidad, presentación y concepto.',
     about2:'Al volver, buscamos algo similar y no lo conseguimos. Había pocas tiendas, pero no capturaban lo que queríamos, así que lo hicimos nosotros: iniciamos en un local pequeñito, con unas mesas y muchas ganas.',
     about3:'Hoy somos dos tiendas propias y un equipo que explica, guía y recomienda, para que tú puedas encontrar tu bebida favorita. Pensamos que vale más vender bien que vender mucho.',
-    timelineTitle:'De una idea a dos tiendas', valuesTitle:'Lo que no negociamos',
+    timelineTitle:'Línea de tiempo', valuesTitle:'Lo que no negociamos',
     storesTitle:'Tiendas', storiesTitle:'Nuestra historia, tienda por tienda', storesSub:'Nuestras dos tiendas en Cali. Nos ves llenos de 4 a 8 p. m.: esa es la hora Mushu.', directions:'Cómo llegar',
-    frKicker:'Franquicias', frTitle:'No franquiciamos desorden. Franquiciamos método.', frSub:'Crecemos despacio, con recetas estandarizadas, procesos auditables y un equipo formado en la cultura Mushu. Si eso te suena, hablemos.',
+    frKicker:'Franquicias', frTitle:'Estamos construyendo nuestro modelo de franquicias.', frSub:'Buscamos personas que nos ayuden a crecer en las principales ciudades del país: Medellín, Bogotá y más. Crecemos despacio, con recetas estandarizadas, procesos auditables y un equipo formado en la cultura Mushu. Si eso te suena, hablemos.',
     frLook:'Qué buscamos', frFormTitle:'Quiero una Mushu', send:'Enviar', thanks:'¡Recibido!', thanksFr:'Te escribimos en los próximos días.', thanksCt:'Te respondemos pronto.',
     contactTitle:'Hablemos', contactSub:'Pedidos para eventos, alianzas, prensa o simplemente decir hola.', fName:'Nombre', fEmail:'Correo', fMsg:'Mensaje',
     footHi:'¿Antojo de bubble tea?', footNote:'Premium, divertido y con raíz asiática.', privacy:'Política de privacidad', terms:'Términos', legalData:'Datos legales', legalName:'Razón social', legalAddr:'Dirección', legalMail:'Correo'
@@ -733,13 +733,13 @@ const T = {
     visitTitle:'Come try it in person.', seeStores:'See stores', franchiseCta:'Franchising', followIg:'Follow us on Instagram',
     menuTitle:'Menu', menuSub:'All in S (16 oz) or M (22 oz). Pick your topping and set your sweetness.',
     menuNote:'Not sure what to order? In store we’ll give you up to 3 picks based on what you like.',
-    aboutKicker:'Our story', aboutTitle:'We weren’t born in a mall.',
+    aboutKicker:'Our story', aboutTitle:'We are a team.',
     about1:'Mushu was born from curiosity: drinks we had never seen in our city. We heard about bubble tea online and from friends living abroad. Then, on a trip to Mexico, we tried it done right: quality, presentation and concept.',
     about2:'Back home we looked for something similar and couldn’t find it. There were a few shops, but none captured what we wanted, so we made it ourselves: we started in a tiny spot with a few tables and a lot of drive.',
     about3:'Today we’re two stores of our own and a team that explains, guides and recommends, so you can find your favorite drink. We believe selling well matters more than selling a lot.',
-    timelineTitle:'From an idea to two stores', valuesTitle:'What we don’t negotiate',
+    timelineTitle:'Timeline', valuesTitle:'What we don’t negotiate',
     storesTitle:'Stores', storiesTitle:'Our story, store by store', storesSub:'Our two stores in Cali. Busiest from 4 to 8 p.m.: that’s Mushu hour.', directions:'Directions',
-    frKicker:'Franchising', frTitle:'We don’t franchise chaos. We franchise method.', frSub:'We grow slowly, with standardized recipes, auditable processes and a team trained in Mushu culture. If that sounds right, let’s talk.',
+    frKicker:'Franchising', frTitle:'We’re building our franchise model.', frSub:'We’re looking for people to help us grow in the country’s main cities: Medellín, Bogotá and beyond. We grow slowly, with standardized recipes, auditable processes and a team trained in Mushu culture. If that sounds right, let’s talk.',
     frLook:'What we look for', frFormTitle:'I want a Mushu', send:'Send', thanks:'Got it!', thanksFr:'We’ll reach out in the next few days.', thanksCt:'We’ll reply soon.',
     contactTitle:'Let’s talk', contactSub:'Event orders, partnerships, press, or just saying hi.', fName:'Name', fEmail:'Email', fMsg:'Message',
     footHi:'Craving bubble tea?', footNote:'Premium, playful, Asian at heart.', privacy:'Privacy policy', terms:'Terms', legalData:'Legal information', legalName:'Company name', legalAddr:'Address', legalMail:'Email'
@@ -967,9 +967,9 @@ class Component extends DCLogic {
       cats:Object.keys(MENU).map(k=>({ label:CAT_LABEL[k][L==='es'?0:1], bg:k===s.cat?'#141414':'transparent', fg:k===s.cat?'#FFFDED':'#141414', pick:()=>this.pickCat(k) })),
       catDesc:cm[L], items, listOp:s.listOp, listY:s.listOp?0:16,
       timeline:(L==='es'?[
-        ['2019','La curiosidad','Descubrimos el bubble tea por redes y amigos en el exterior.'],['México','El sorbo que lo cambió','Probamos un bubble tea con calidad y concepto de verdad.'],['2023','La primera Mushu','Un local pequeñito en Cali, unas mesas y muchas ganas.'],['2025','La segunda','Abrimos nuestra segunda tienda propia.']
+        ['2021','El descubrimiento','Conocimos el bubble tea por redes sociales y nos quedó sonando.'],['2022','La curiosidad','Investigamos el producto a fondo, probamos y diseñamos la marca.'],['2023','Miraflores','Abrimos un local pequeño fuera de la casa. Así probamos y validamos el producto.'],['2024','Ferias y universidades','Llevamos la marca a ferias y universidades. Ahí supimos que teníamos que abrir en el sur de la ciudad.'],['2025','Pance','Construimos y abrimos nuestra tienda en Lago Verde.'],['2026','Volver a las bases','Nos organizamos, volvimos a lo esencial y estandarizamos cada receta y proceso.']
       ]:[
-        ['2019','The curiosity','We found bubble tea online and through friends abroad.'],['Mexico','The sip that changed it','We tried bubble tea with real quality and concept.'],['2023','The first Mushu','A tiny spot in Cali, a few tables and lots of drive.'],['2025','The second','We opened our second company-owned store.']
+        ['2021','The discovery','We came across bubble tea on social media and couldn’t stop thinking about it.'],['2022','The curiosity','We researched the product in depth, tested it and designed the brand.'],['2023','Miraflores','We opened a small shop outside our home. That’s how we tested and validated the product.'],['2024','Fairs and universities','We took the brand to fairs and universities. That’s when we knew we had to open in the south of the city.'],['2025','Pance','We built and opened our store at Lago Verde.'],['2026','Back to basics','We got organized, went back to the essentials and standardized every recipe and process.']
       ]).map((x,i)=>({ year:x[0], title:x[1], text:x[2], delay:i*90 })),
       values:(L==='es'?[
         ['Calidad','Ingredientes y sabor sin atajos.'],['Procesos','Cada paso se respeta, siempre.'],['Recetas','Si no cumple el estándar, no sale.']
@@ -977,11 +977,11 @@ class Component extends DCLogic {
         ['Quality','Ingredients and flavor, no shortcuts.'],['Process','Every step respected, always.'],['Recipes','If it’s not standard, it doesn’t leave.']
       ]).map((x,i)=>({ title:x[0], text:x[1], delay:i*90, bg:['#A7A4E0','#ECFA95','#86C8BC','#FFFDED'][i] })),
       stores, cur: stories[s.store], curOp: s.storeOp===0?0:1,
-      frFacts:(L==='es'?[['~15 m²','Locales pequeños y eficientes'],['Alto flujo','Peatonal, al aire libre, público curioso'],['3 ciudades','Cali, Bogotá y Medellín']]:[['~15 m²','Small, efficient stores'],['High traffic','Walkable, open-air, curious crowds'],['3 cities','Cali, Bogotá and Medellín']]).map((x,i)=>({ big:x[0], text:x[1], delay:i*90, bg:[C.taro,C.mango,C.pink][i] })),
+      frFacts:(L==='es'?[['~15 m²','Locales pequeños y eficientes'],['Alto flujo','Peatonal, al aire libre, público curioso'],['Nuevas ciudades','Medellín, Bogotá y más']]:[['~15 m²','Small, efficient stores'],['High traffic','Walkable, open-air, curious crowds'],['New cities','Medellín, Bogotá and beyond']]).map((x,i)=>({ big:x[0], text:x[1], delay:i*90, bg:[C.taro,C.mango,C.pink][i] })),
       frSteps:(L==='es'?[
-        ['Pasión por el detalle','Que te importe el sabor, la textura y la presentación tanto como a nosotros.'],['Respeto por el método','Recetas estandarizadas y procesos que se cumplen sin interpretación.'],['Cultura de equipo','Un equipo que explica, guía y recomienda al cliente.'],['Visión a largo plazo','Calidad sobre volumen. Ejecución sobre ventas.']
+        ['Pasión por el detalle','Que te importe el sabor, la textura y la presentación tanto como a nosotros.'],['Respeto por el método','Recetas estandarizadas y procesos que se cumplen sin interpretación.'],['Cultura de equipo','Un equipo que explica, guía y recomienda al cliente.'],['Visión a largo plazo','Calidad sobre volumen. Ejecución sobre ventas.'],['Ganas de hacer marca','Personas apasionadas y creativas que aporten ideas y estén dispuestas a trabajar para dar a conocer Mushu.']
       ]:[
-        ['Love for detail','You care about flavor, texture and presentation as much as we do.'],['Respect for method','Standard recipes and processes followed without interpretation.'],['Team culture','A team that explains, guides and recommends.'],['Long-term view','Quality over volume. Execution over sales.']
+        ['Love for detail','You care about flavor, texture and presentation as much as we do.'],['Respect for method','Standard recipes and processes followed without interpretation.'],['Team culture','A team that explains, guides and recommends.'],['Long-term view','Quality over volume. Execution over sales.'],['Drive to build the brand','Passionate, creative people who bring ideas and are ready to work to make Mushu known.']
       ]).map((x,i)=>({ n:'0'+(i+1), title:x[0], text:x[1], delay:i*80 })),
       frFields:(L==='es'?[['Nombre','Tu nombre'],['Ciudad','¿Dónde la abrirías?'],['Correo','tu@correo.com'],['Teléfono','+57']]:[['Name','Your name'],['City','Where would you open it?'],['Email','you@email.com'],['Phone','+57']]).map(x=>({ label:x[0], ph:x[1] })),
       frSent:s.frSent, frForm:!s.frSent, sendFr:()=>this.sendForm('[data-fr]','Solicitud de franquicia - web Mushu','frSent'),
